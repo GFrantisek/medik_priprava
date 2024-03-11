@@ -1,0 +1,1 @@
+while loading scripts on different device, 1. install font, 2. change db parameters on connection
