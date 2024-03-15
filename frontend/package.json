@@ -17,6 +17,7 @@
     "webpack": "^4.46.0"
   },
   "devDependencies": {
+    "@nuxt/types": "~2.17.0",
     "@nuxtjs/tailwindcss": "^4.2.1",
     "postcss": "^8.4.4"
   }
