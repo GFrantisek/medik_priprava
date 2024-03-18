@@ -17,6 +17,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+
+from django.urls import path, include
+from pdfgenerator import views as pdf_views
+
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('generate_pdf/', pdf_views.generate_pdf, name='generate_pdf'),
+    # Include other app-specific urls with: path('pdfgenerator/', include('pdfgenerator.urls')),
 ]

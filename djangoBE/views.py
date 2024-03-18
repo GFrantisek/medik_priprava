@@ -1,22 +1,26 @@
 from django.http import HttpResponse
-from reportlab.pdfgen import canvas
-from .models import Question
+from io import BytesIO
+# Import your PDF generation classes and methods here
+from .pdf_generation import PDF, create_pdf, connect_db, fetch_questions_and_answers, create_pdf_table
+from django.conf import settings
+import os
 
 
-def generate_test_pdf(request, num_questions, start_id, end_id):
-    response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename="test.pdf"'
+def generate_pdf(request):
+    # Database connection
+    conn = connect_db(db_params)
+    question_answers = fetch_questions_and_answers(conn)
 
-    p = canvas.Canvas(response)
+    # Generate PDF
+    buffer = BytesIO()
+    create_pdf(question_answers, buffer)
+    # Alternatively, if using create_pdf_table:
+    # create_pdf_table(buffer)
 
-    # Example: Fetch questions based on user input (simplified for demo)
-    questions = Question.objects.filter(id__gte=start_id, id__lte=end_id)[:num_questions]
+    conn.close()
 
-    y_position = 800
-    for question in questions:
-        p.drawString(100, y_position, question.question_text)
-        y_position -= 100
-
-    p.showPage()
-    p.save()
+    # Prepare response
+    buffer.seek(0)
+    response = HttpResponse(buffer, content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="questions_and_answers.pdf"'
     return response
