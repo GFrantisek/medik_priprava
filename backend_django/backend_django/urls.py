@@ -1,5 +1,5 @@
 """
-URL configuration for djangoBE project.
+URL configuration for backend_django project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/5.0/topics/http/urls/
@@ -16,12 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
-
-from django.urls import path, include
-from pdfgenerator import views as pdf_views
+from . import views
+from .views import generate_pdf
 
 urlpatterns = [
-    path('generate_pdf/', pdf_views.generate_pdf, name='generate_pdf'),
-    # Include other app-specific urls with: path('pdfgenerator/', include('pdfgenerator.urls')),
+    path('admin/', admin.site.urls),
+    #path('generate-pdf/', views.generate_pdf, name='generate-pdf'),
+    path('generate-pdf/', generate_pdf, name='generate-pdf'),
+
 ]

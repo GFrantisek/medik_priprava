@@ -27,23 +27,33 @@ export default {
     };
   },
   methods: {
-    generateTest() {
-      // Placeholder content generation logic
-      const testContent = `Test generated with ${this.numQuestions} questions from question ID ${this.startQuestion} to ${this.endQuestion}.`;
+    async generateTest() {
+      try {
+        const response = await this.$axios({
+          url: 'http://localhost:8000/generate-pdf/',
+          method: 'GET',
+          responseType: 'blob',
+          params: {
+            numQuestions: this.numQuestions,
+            startQuestion: this.startQuestion,
+            endQuestion: this.endQuestion,
+          },
+        });
 
-      // Download logic
-      const element = document.createElement('a');
-      element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(testContent));
-      element.setAttribute('download', 'test.txt');
-
-      element.style.display = 'none';
-      document.body.appendChild(element);
-
-      element.click();
-
-      document.body.removeChild(element);
-    },
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', 'test.pdf');
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
+      } catch (error) {
+        console.error('Error during PDF generation or download:', error);
+      }
+    }
   },
+
 };
 </script>
 
