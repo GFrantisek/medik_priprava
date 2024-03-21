@@ -17,11 +17,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from . import views
-from .views import generate_pdf
+from .views import generate_pdf, get_test_questions
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     #path('generate-pdf/', views.generate_pdf, name='generate-pdf'),
     path('generate-pdf/', generate_pdf, name='generate-pdf'),
+    path('api/get_test_questions/', get_test_questions, name='get_test_questions'),
 
 ]

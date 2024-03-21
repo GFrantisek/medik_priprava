@@ -1,8 +1,33 @@
-from django.http import FileResponse, HttpResponse
+from random import random
+
+from django.http import FileResponse, HttpResponse, JsonResponse
+from django.shortcuts import render
 
 from . import settings
 from .utils import fetch_questions_and_answers, create_pdf, connect_db, db_params
 import os
+
+
+def get_test_questions(request):
+    # Establish a connection to the database
+    conn = connect_db(db_params)
+
+    # Fetch questions and their answers
+    # For example, fetch 20 questions starting from ID 1 to ID 40
+    questions_and_answers = fetch_questions_and_answers(conn, 20, 1, 40)
+
+    # Make sure to close the connection after you're done
+    conn.close()
+
+    # Return the questions and answers as a JSON response
+    response = JsonResponse(questions_and_answers)
+
+    # Set CORS headers on the response
+    if settings.DEBUG:  # Only allow wide open CORS policy in debug mode for safety
+        response["Access-Control-Allow-Origin"] = "*"
+        response["Access-Control-Allow-Methods"] = "GET, OPTIONS"
+        response["Access-Control-Allow-Headers"] = "X-Requested-With, Content-Type"
+    return response
 
 
 def generate_pdf(request):

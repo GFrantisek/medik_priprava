@@ -5,32 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6cddd35b-4ea6-43ae-b2da-c81064eeb764" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../backend_django/backend_django/utils.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../backend_django/backend_django/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/django_backend/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../djangoBE/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../djangoBE/.idea/djangoBE.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../djangoBE/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../djangoBE/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../djangoBE/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../djangoBE/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../djangoBE/djangoBE/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../djangoBE/djangoBE/asgi.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../djangoBE/djangoBE/settings.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../djangoBE/djangoBE/urls.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../djangoBE/djangoBE/wsgi.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../djangoBE/manage.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../djangoBE/models.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../djangoBE/pdf_generation/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../djangoBE/pdf_generation/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../djangoBE/pdf_generation/main.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../djangoBE/views.py" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/interaktivny_test.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend_django/backend_django/pdfs/questions.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_django/backend_django/pdfs/questions.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend_django/backend_django/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_django/backend_django/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend_django/backend_django/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_django/backend_django/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Vue Single File Component" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -43,21 +33,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/frant",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "npm.npm build.executor": "Run",
-    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\WebStorm 2023.3\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
-    "vue.rearranger.settings.migration": "true",
-    "vuejs.nuxt.types-notification-shown": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/frant&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;npm.npm build.executor&quot;: &quot;Run&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\WebStorm 2023.3\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;,
+    &quot;vuejs.nuxt.types-notification-shown&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="npm.npm build">
     <configuration name="npm build" type="js.build_tools.npm">
       <package-json value="$PROJECT_DIR$/package.json" />
@@ -104,5 +94,16 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
