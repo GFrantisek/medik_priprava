@@ -3,14 +3,21 @@
     <aside class="sidebar">
       <div class="progress-bar" :style="{ width: progressBarWidth + '%' }"></div>
       <nav class="question-nav">
-        <button v-for="(index) in questions" :key="index" class="question-nav-item">
-          Otázka {{ index + 1 }}
+        <button
+          v-for="(question, index) in questions"
+          :key="question.id"
+          class="question-nav-item"
+          @click="scrollToQuestion(index)">
+          Otázka {{ question.id }}
         </button>
       </nav>
     </aside>
     <main class="question-content">
-      <h1>2023 A</h1>
-      <div v-for="(question, index) in questions" :key="index" class="question-block">
+      <div
+        v-for="(question, index) in questions"
+        :key="index"
+        class="question-block"
+        :ref="'question-' + index">
         <p class="question-text">{{ question.text }}</p>
         <ul class="answers-list">
           <li v-for="answer in question.answers" :key="answer[0]"
@@ -29,6 +36,7 @@
       </div>
       <div class="submit-wrapper">
         <button class="submit-button" @click="submitAnswers" :disabled="submissionAttempted">Submit Test</button>
+        <button class="download-pdf-button" @click="downloadPdf">Download PDF </button>
       </div>
       <div v-if="submissionAttempted" id="incorrectCountDisplay%">
         Your points: {{ points }} / {{ maxPoints }} ( {{percentage}} % )
@@ -59,7 +67,8 @@ export default {
   },
   methods: {
     fetchQuestions() {
-      fetch('http://localhost:8000/api/get_test_questions/')
+      const params = this.$route.query; // Access route query parameters
+      fetch(`http://localhost:8000/api/get_test_questions/?numQuestions=${params.numQuestions}&startQuestion=${params.startQuestion}&endQuestion=${params.endQuestion}`)
         .then(response => response.json())
         .then(data => {
           this.questions = Object.entries(data).map(([key, value]) => ({
@@ -67,7 +76,6 @@ export default {
             id: key
           }));
           this.maxPoints = this.questions.length * 4;
-
         })
         .catch(error => {
           console.error('Fetching questions failed:', error);
@@ -113,7 +121,34 @@ export default {
       });
       this.points = this.maxPoints - this.incorrectCount;
       this.percentage = ((this.points / this.maxPoints) * 100).toFixed(2);
-    }
+    },
+    downloadPdf() {
+      const params = this.$route.query;
+      const queryParams = new URLSearchParams(params).toString();
+      const url = `http://localhost:8000/generate-pdf/?${queryParams}`;
+
+      fetch(url, {
+        method: 'GET',
+      })
+        .then(response => response.blob())
+        .then(blob => {
+          const fileUrl = window.URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = fileUrl;
+          a.download = 'test.pdf';
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          window.URL.revokeObjectURL(fileUrl);
+        })
+        .catch(error => console.error('Error downloading PDF:', error));
+    },
+    scrollToQuestion(index) {
+      const questionRef = this.$refs['question-' + index][0];
+      if (questionRef) {
+        questionRef.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    },
   }
 };
 
@@ -212,9 +247,25 @@ export default {
   border-radius: 4px;
   cursor: pointer;
   font-size: 16px;
+  margin-right: 5px;
 }
 
 .submit-button:hover {
+  background-color: #6841c9;
+}
+
+
+.download-pdf-button {
+  padding: 10px 20px;
+  background-color: #7C4DFF;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.download-pdf-button:hover {
   background-color: #6841c9;
 }
 </style>

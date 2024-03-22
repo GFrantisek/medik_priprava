@@ -13,7 +13,9 @@
       <label for="endQuestion">To Question ID:</label>
       <input type="number" id="endQuestion" v-model.number="endQuestion" min="1" />
     </div>
-    <button @click="generateTest">Generate and Download Test</button>
+    <button @click="generateTest">Download Test</button>
+    <button @click="generateInteractiveTest">Generate Interactive Test</button>
+
   </div>
 </template>
 
@@ -51,7 +53,18 @@ export default {
       } catch (error) {
         console.error('Error during PDF generation or download:', error);
       }
-    }
+    },
+    generateInteractiveTest() {
+      // Navigate using the path
+      this.$router.push({
+        path: '/interaktivny_test', // Use the correct path
+        query: {
+          numQuestions: this.numQuestions.toString(),
+          startQuestion: this.startQuestion.toString(),
+          endQuestion: this.endQuestion.toString(),
+        }
+      });
+    },
   },
 
 };

@@ -1,42 +1,57 @@
-from random import random
+# views.py
 
 from django.http import FileResponse, HttpResponse, JsonResponse
 from django.shortcuts import render
-
-from . import settings
-from .utils import fetch_questions_and_answers, create_pdf, connect_db, db_params
+from django.conf import settings
 import os
 
+from .utils import fetch_questions_and_answers, create_pdf, connect_db, db_params
 
-def get_test_questions(request):
-    conn = connect_db(db_params)
 
-    # add response take from frontend
-    questions_and_answers = fetch_questions_and_answers(conn, 30, 1, 40)
+# Utility function for fetching request parameters with defaults
+def get_request_params(request, param_defaults=None):
+    if param_defaults is None:
+        param_defaults = {'numQuestions': '100', 'startQuestion': '1', 'endQuestion': '200'}
+    return {param: int(request.GET.get(param, default)) for param, default in param_defaults.items()}
 
-    conn.close()
 
-    response = JsonResponse(questions_and_answers)
-
-    if settings.DEBUG:  #
+# Utility function for setting CORS headers
+def set_cors_headers(response):
+    if settings.DEBUG:
         response["Access-Control-Allow-Origin"] = "*"
         response["Access-Control-Allow-Methods"] = "GET, OPTIONS"
         response["Access-Control-Allow-Headers"] = "X-Requested-With, Content-Type"
     return response
 
 
+# Decorator for CORS headers
+def cors_headers(view_func):
+    def wrapper(request, *args, **kwargs):
+        response = view_func(request, *args, **kwargs)
+        return set_cors_headers(response)
+
+    return wrapper
+
+
+@cors_headers
+def get_test_questions(request):
+    params = get_request_params(request)
+    conn = connect_db(db_params)
+    # Adjust the below line as needed based on your actual function's parameters
+    questions_and_answers = fetch_questions_and_answers(conn, params['numQuestions'], params['startQuestion'],
+                                                        params['endQuestion'])
+    conn.close()
+    return JsonResponse(questions_and_answers)
+
+
+@cors_headers
 def generate_pdf(request):
     try:
-        num_questions = request.GET.get('numQuestions', '100')
-        start_question = request.GET.get('startQuestion', '1')
-        end_question = request.GET.get('endQuestion', '200')
-
-        num_questions = int(num_questions)
-        start_question = int(start_question)
-        end_question = int(end_question)
-
+        params = get_request_params(request)
         conn = connect_db(db_params)
-        question_answers = fetch_questions_and_answers(conn, num_questions, start_question, end_question)
+        # Adjust the below line as needed based on your actual function's parameters
+        question_answers = fetch_questions_and_answers(conn, params['numQuestions'], params['startQuestion'],
+                                                       params['endQuestion'])
         conn.close()
 
         pdf_directory = os.path.join(os.path.dirname(__file__), 'pdfs')
@@ -50,16 +65,8 @@ def generate_pdf(request):
         with open(pdf_filepath, 'rb') as pdf_file:
             response = HttpResponse(pdf_file.read(), content_type='application/pdf')
             response['Content-Disposition'] = f'attachment; filename="{filename}"'
-
-            response["Access-Control-Allow-Origin"] = "*"
-            response["Access-Control-Allow-Methods"] = "GET, OPTIONS"
-            response["Access-Control-Allow-Headers"] = "X-Requested-With, Content-Type"
-
             return response
 
     except Exception as e:
-        return HttpResponse(
-            content=f"An error occurred while generating the PDF: {e}",
-            status=500,
-            content_type="text/plain"
-        )
+        return HttpResponse(content=f"An error occurred while generating the PDF: {e}", status=500,
+                            content_type="text/plain")
