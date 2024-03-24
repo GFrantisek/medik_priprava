@@ -1,0 +1,8 @@
+current state of project
+
+done database implementation in postgres
+created script that takes data from csv (excel tables) and pushes them into database 
+tested aws rds creation system and connection - issue solve vpc groups, due to charges per creating one 
+basic frontend - used to test creating pdfs from test and creating simple interractive test
+backend - implementation of functional interractive testing, send of json file to fe, - issue solve storage of created tests + user creation
+

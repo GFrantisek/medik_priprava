@@ -5,11 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6cddd35b-4ea6-43ae-b2da-c81064eeb764" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../backend_django/.idea/dataSources.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/pages/interaktivny_test.vue" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/router/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../backend_django/backend_django/pdfs/questions.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_django/backend_django/pdfs/questions.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend_django/backend_django/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_django/backend_django/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,7 +89,7 @@
       <option name="presentableId" value="Default" />
       <updated>1710845800974</updated>
       <workItem from="1710845803639" duration="7143000" />
-      <workItem from="1711116222592" duration="2842000" />
+      <workItem from="1711116222592" duration="4024000" />
     </task>
     <servers />
   </component>
