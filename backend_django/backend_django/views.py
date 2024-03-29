@@ -3,9 +3,10 @@
 from django.http import FileResponse, HttpResponse, JsonResponse
 from django.shortcuts import render
 from django.conf import settings
+import zipfile
 import os
 
-from .utils import fetch_questions_and_answers, create_pdf, connect_db, db_params
+from .utils import fetch_questions_and_answers, create_pdf, connect_db, db_params, create_pdf_with_correct_answers
 
 
 # Utility function for fetching request parameters with defaults
@@ -49,24 +50,37 @@ def generate_pdf(request):
     try:
         params = get_request_params(request)
         conn = connect_db(db_params)
-        # Adjust the below line as needed based on your actual function's parameters
-        question_answers = fetch_questions_and_answers(conn, params['numQuestions'], params['startQuestion'],
-                                                       params['endQuestion'])
+        question_answers = fetch_questions_and_answers(conn, params['numQuestions'], params['startQuestion'], params['endQuestion'])
         conn.close()
 
         pdf_directory = os.path.join(os.path.dirname(__file__), 'pdfs')
         os.makedirs(pdf_directory, exist_ok=True)
 
-        filename = 'questions.pdf'
-        pdf_filepath = os.path.join(pdf_directory, filename)
+        # Filenames for the two PDFs
+        filename_questions = 'questions.pdf'
+        filename_questions_with_correct = 'questions_with_correct.pdf'
 
-        create_pdf(question_answers, pdf_filepath)
+        # File paths for the two PDFs
+        pdf_filepath_questions = os.path.join(pdf_directory, filename_questions)
+        pdf_filepath_questions_with_correct = os.path.join(pdf_directory, filename_questions_with_correct)
 
-        with open(pdf_filepath, 'rb') as pdf_file:
-            response = HttpResponse(pdf_file.read(), content_type='application/pdf')
-            response['Content-Disposition'] = f'attachment; filename="{filename}"'
+        # Generate both PDFs
+        create_pdf(question_answers, pdf_filepath_questions)
+        create_pdf_with_correct_answers(question_answers, pdf_filepath_questions_with_correct)
+
+        # Zip both PDFs
+        zip_filename = "questions_package.zip"
+        zip_filepath = os.path.join(pdf_directory, zip_filename)
+        with zipfile.ZipFile(zip_filepath, 'w') as myzip:
+            myzip.write(pdf_filepath_questions, filename_questions)
+            myzip.write(pdf_filepath_questions_with_correct, filename_questions_with_correct)
+
+        # Return the zip file
+        with open(zip_filepath, 'rb') as zip_file:
+            response = HttpResponse(zip_file.read(), content_type='application/zip')
+            response['Content-Disposition'] = f'attachment; filename="{zip_filename}"'
             return response
 
     except Exception as e:
-        return HttpResponse(content=f"An error occurred while generating the PDF: {e}", status=500,
-                            content_type="text/plain")
+        return HttpResponse(content=f"An error occurred while generating the PDFs: {e}", status=500, content_type="text/plain")
+

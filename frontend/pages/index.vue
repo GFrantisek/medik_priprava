@@ -32,7 +32,7 @@ export default {
     async generateTest() {
       try {
         const response = await this.$axios({
-          url: 'http://localhost:8000/generate-pdf/',
+          url: 'https://medik-cloud-i4zdozbjjq-lm.a.run.app/generate-pdf/',
           method: 'GET',
           responseType: 'blob',
           params: {
@@ -45,7 +45,8 @@ export default {
         const url = window.URL.createObjectURL(new Blob([response.data]));
         const link = document.createElement('a');
         link.href = url;
-        link.setAttribute('download', 'test.pdf');
+        // Update the filename to indicate it's a ZIP file
+        link.setAttribute('download', 'tests_package.zip');
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);

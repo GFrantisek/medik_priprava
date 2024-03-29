@@ -68,7 +68,7 @@ export default {
   methods: {
     fetchQuestions() {
       const params = this.$route.query; // Access route query parameters
-      fetch(`http://localhost:8000/api/get_test_questions/?numQuestions=${params.numQuestions}&startQuestion=${params.startQuestion}&endQuestion=${params.endQuestion}`)
+      fetch(`https://medik-cloud-i4zdozbjjq-lm.a.run.app/api/get_test_questions/?numQuestions=${params.numQuestions}&startQuestion=${params.startQuestion}&endQuestion=${params.endQuestion}`)
         .then(response => response.json())
         .then(data => {
           this.questions = Object.entries(data).map(([key, value]) => ({
@@ -125,7 +125,7 @@ export default {
     downloadPdf() {
       const params = this.$route.query;
       const queryParams = new URLSearchParams(params).toString();
-      const url = `http://localhost:8000/generate-pdf/?${queryParams}`;
+      const url = `https://medik-cloud-i4zdozbjjq-lm.a.run.app/generate-pdf/?${queryParams}`;
 
       fetch(url, {
         method: 'GET',

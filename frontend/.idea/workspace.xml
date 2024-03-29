@@ -5,9 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6cddd35b-4ea6-43ae-b2da-c81064eeb764" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../backend_django/backend_django/pdfs/questions_package.zip" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../backend_django/backend_django/pdfs/questions_with_correct.pdf" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/pages/interaktivny_test.vue" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/router/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../backend_django/backend_django/pdfs/questions.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_django/backend_django/pdfs/questions.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend_django/backend_django/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_django/backend_django/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend_django/backend_django/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_django/backend_django/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend_django/static/dejavu_sans (1)/DejaVu_Sans/DejaVuSansCondensed-Bold.cw127.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend_django/static/dejavu_sans (1)/DejaVu_Sans/DejaVuSansCondensed-Bold.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend_django/static/dejavu_sans (1)/DejaVu_Sans/DejaVuSansCondensed-Bold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend_django/static/dejavu_sans (1)/DejaVu_Sans/readme.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../db/answers.csv" beforeDir="false" afterPath="$PROJECT_DIR$/../db/answers.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../db/answers.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/../db/answers.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../db/insert_questions.py" beforeDir="false" afterPath="$PROJECT_DIR$/../db/insert_questions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../db/questions.csv" beforeDir="false" afterPath="$PROJECT_DIR$/../db/questions.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../db/questions.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/../db/questions.xlsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,6 +103,11 @@
       <updated>1710845800974</updated>
       <workItem from="1710845803639" duration="7143000" />
       <workItem from="1711116222592" duration="4024000" />
+      <workItem from="1711367499791" duration="592000" />
+      <workItem from="1711385013018" duration="2336000" />
+      <workItem from="1711393342603" duration="1260000" />
+      <workItem from="1711464387258" duration="3499000" />
+      <workItem from="1711703239761" duration="706000" />
     </task>
     <servers />
   </component>

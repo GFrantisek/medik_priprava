@@ -10,10 +10,10 @@ from reportlab.lib import colors
 from backend_django import settings
 
 db_params = {
-    "dbname": "medicina_tests_final",
-    "user": "postgres",
-    "password": "Skola2011x@",
-    "host": "localhost",
+    "dbname": "medicina",
+    "user": "madmin",
+    "password": "Skola2011xT",
+    "host": "medicina.cp4mikq0waak.eu-north-1.rds.amazonaws.com",
     "port": "5432"
 }
 
@@ -64,11 +64,8 @@ class PDF(FPDF):
     pass
 
 
+
 def create_pdf(question_answers, filename):
-
-    #regular_font_path = settings.BASE_DIR / 'static' / 'DejaVu_Sans' / 'DejaVuSansCondensed.ttf'
-    #bold_font_path = settings.BASE_DIR / 'static' / 'DejaVu_Sans' / 'DejaVuSansCondensed-Bold.ttf'
-
     regular_font_path = os.path.join(settings.BASE_DIR, 'static', 'DejaVu_Sans', 'DejaVuSansCondensed.ttf')
     bold_font_path = os.path.join(settings.BASE_DIR, 'static', 'dejavu_sans (1)', 'DejaVu_Sans',
                                   'DejaVuSansCondensed-Bold.ttf')
@@ -79,55 +76,57 @@ def create_pdf(question_answers, filename):
     pdf.add_font('DejaVu', 'B', bold_font_path, uni=True)
 
     for i, (q_id, data) in enumerate(question_answers.items(), start=1):
-        pdf.set_font('DejaVu', 'B', 10)
-        question_text_with_id = f"{i}. {data['text']} (ID: {q_id})"
-        pdf.multi_cell(0, 8, question_text_with_id)
+        pdf.set_font('DejaVu', 'B', 12)  # Larger font size for questions
+        question_text_with_id = f"{i}. {data['text']}"
+        pdf.multi_cell(0, 7, question_text_with_id)  # Adjusted line height
 
-        pdf.set_font('DejaVu', '', 9)
+        pdf.set_font('DejaVu', '', 9)  # Regular font for answers
         for index, answer in enumerate(data['answers']):
-            answer_id, answer_text, is_correct = answer
+            answer_id, answer_text, _ = answer
             finalid = answer_id % 8
             if finalid == 0:
                 finalid = 8
 
             label = ['A', 'B', 'C', 'D'][index % 4]
-            answer_text_with_label = f"{label}. {answer_text} (ID: {finalid})"
+            answer_text_with_label = f"{label}. {answer_text}"
             pdf.multi_cell(0, 6, answer_text_with_label)
 
+        # Add some space after the block of answers, before the next question
+        pdf.ln(10)  # Adjust the parameter to increase or decrease the space
+
     pdf.output(filename)
-    pass
 
 
 def create_pdf_with_correct_answers(question_answers, filename):
-    # regular_font_path = settings.BASE_DIR / 'static' / 'DejaVu_Sans' / 'DejaVuSansCondensed.ttf'
-    # bold_font_path = settings.BASE_DIR / 'static' / 'DejaVu_Sans' / 'DejaVuSansCondensed-Bold.ttf'
 
     regular_font_path = os.path.join(settings.BASE_DIR, 'static', 'DejaVu_Sans', 'DejaVuSansCondensed.ttf')
-    bold_font_path = os.path.join(settings.BASE_DIR, 'static', 'dejavu_sans (1)', 'DejaVu_Sans',
+    bold_font_path = os.path.join(settings.BASE_DIR, 'static', 'dejavu_2', 'DejaVu_Sans',
                                   'DejaVuSansCondensed-Bold.ttf')
-
     pdf = PDF()
     pdf.add_page()
-
     pdf.add_font('DejaVu', '', regular_font_path, uni=True)
     pdf.add_font('DejaVu', 'B', bold_font_path, uni=True)
 
     for i, (q_id, data) in enumerate(question_answers.items(), start=1):
-        pdf.set_font('DejaVu', 'B', 10)
+        pdf.set_font('DejaVu', 'B', 12)  # Larger font size for questions
         question_text_with_id = f"{i}. {data['text']} (ID: {q_id})"
-        pdf.multi_cell(0, 8, question_text_with_id)
+        pdf.multi_cell(0, 7, question_text_with_id)  # Adjusted line height
 
-        pdf.set_font('DejaVu', '', 9)
         for index, answer in enumerate(data['answers']):
             answer_id, answer_text, is_correct = answer
             label = ['A', 'B', 'C', 'D'][index % 4]
             answer_text_with_label = f"{label}. {answer_text} (ID: {answer_id})"
             if is_correct:
-                answer_text_with_label += " CORRECT"
+                pdf.set_font('DejaVu', 'B', 9)  # Bold for correct answer
+            else:
+                pdf.set_font('DejaVu', '', 9)  # Regular font for other answers
             pdf.multi_cell(0, 6, answer_text_with_label)
 
+        # Add some space after the block of answers, before the next question
+        pdf.ln(10)  # Adjust the parameter to increase or decrease the space
+
     pdf.output(filename)
-    pass
+
 
 
 def create_pdf_table(output_filename):
