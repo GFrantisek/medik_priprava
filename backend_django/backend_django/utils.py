@@ -17,6 +17,10 @@ db_params = {
     "port": "5432"
 }
 
+regular_font_path = os.path.join(settings.BASE_DIR, 'static', 'DejaVu_Sans', 'DejaVuSansCondensed.ttf')
+bold_font_path = os.path.join(settings.BASE_DIR, 'static', 'dejavu_2', 'DejaVu_Sans',
+                              'DejaVuSansCondensed-Bold.ttf')
+
 
 # Connect to the database
 def connect_db(params):
@@ -66,10 +70,6 @@ class PDF(FPDF):
 
 
 def create_pdf(question_answers, filename):
-    regular_font_path = os.path.join(settings.BASE_DIR, 'static', 'DejaVu_Sans', 'DejaVuSansCondensed.ttf')
-    bold_font_path = os.path.join(settings.BASE_DIR, 'static', 'dejavu_sans (1)', 'DejaVu_Sans',
-                                  'DejaVuSansCondensed-Bold.ttf')
-
     pdf = PDF()
     pdf.add_page()
     pdf.add_font('DejaVu', '', regular_font_path, uni=True)
@@ -99,9 +99,8 @@ def create_pdf(question_answers, filename):
 
 def create_pdf_with_correct_answers(question_answers, filename):
 
-    regular_font_path = os.path.join(settings.BASE_DIR, 'static', 'DejaVu_Sans', 'DejaVuSansCondensed.ttf')
-    bold_font_path = os.path.join(settings.BASE_DIR, 'static', 'dejavu_2', 'DejaVu_Sans',
-                                  'DejaVuSansCondensed-Bold.ttf')
+    print(bold_font_path)
+
     pdf = PDF()
     pdf.add_page()
     pdf.add_font('DejaVu', '', regular_font_path, uni=True)
