@@ -1,0 +1,25 @@
+Report má obsahovať:
+  - Meno, priezvisko
+  - Názov projektu
+  - Tag vo Vašom GitHube, ktorý označuje reportovanú verziu Vášho projektu v tvare //version_week_(cislo)//, príklad: //version_week_5// pre prvý report
+  - Týždeň, za ktorý sa robí report, vo forme dátum od-do, príklad //5 týždeň: 18.3.2024 - 24.3.2024// v prvom reporte
+  - Čo ste plánovali spraviť za tento týždeň?
+  - Čo ste spravili za tento týždeň? (ku každej veci je nutné priradiť číslo commitu, ktorý ju implementuje - samostatný commit pre každú vec)
+  - Ak medzi prvým a druhým bodom sú nejaké rozdiely, tak prečo? 
+  - Aké sú Vaše plány na ďalší týždeň?
+  - S čím ste mali problémy? - ak nastali nejaké zmeny oproti špecifikácii, je povinné ich uviesť v tejto časti spolu so zdôvodnením.
+
+
+František Gábor
+medik_priprava
+//version_week_6 ??? neviem co sa tymto mysli
+2tyzden (prace) / week 6
+v projektovej specifikacii som mal v plane vytvorenie modelov, kontrolerov a endpointov pre zakladne funkcie, to vsak uz je z vacsiny implementovane due to week 1, takisto aj databaza, takze som sa zameral na deploynutie apky na
+cloud services -> https://testovisko.netlify.app/  , kedze nastala zmena v plane dat backend na AWS namiesto toho som sa rozhodol pre Google Cloud services kedze umoznuju lahsi a menej narocny deploy backendu
+u. Napriklad deploy na AWS by zahrnal otravne riesenie novych services ale objavil som pri studiu moznost v Intelijj/PyCharm instalovat plugin Google Cloud, tento plugin umoznuje vies vyvoj v 2 smeroch, za pouzitia
+dockeru sa da apka spustit lokalne a tak testovat, na zaklade tohto ak je apka dokoncena deploy uz vyriesi specialna configuracia runu, za predpokladu ze je vopred setupnuty Google Cloud Projcet. Uspesnost tohto deployu
+je mozne skontrolovat na danom linku popripade na https://medik-cloud-i4zdozbjjq-lm.a.run.app/ (specialny endpoint pre backend) cez neho sa pytam na moznost https://medik-cloud-i4zdozbjjq-lm.a.run.app/api/get_test_questions/
+kde dostanem json z db. taktiez tam budu aj ine funkcnosti ktore su zatial len lokalne. Pushnem to do repa popripade vytvorim nove specialne pre tuto verziu backendu, kvoli jednoduchosti deployu.
+
+Plany na dalsi tyzden budu pravdepodobne vytvorenie autentifikacie uzivatelov a mozno prenos db z aws na google cloud, kedze aws free tier databaza je znacne pomalsia oproti tomu co nam umozni google cloud, popripade ak sa mi 
+podari spojazdnit moje servriky (optional kedze instalacia OS na server starsi ako 7 rokov je pain) tak ulohou tohto tyzdna bude ich spojazdnit a nechat hostovat BE, DB mozno aj frontend nadanych serrikoch. 

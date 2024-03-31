@@ -1,0 +1,45 @@
+OLD VERSION
+current state of project
+
+done database implementation in postgres
+created script that takes data from csv (excel tables) and pushes them into database 
+tested aws rds creation system and connection - issue solve vpc groups, due to charges per creating one 
+basic frontend - used to test creating pdfs from test and creating simple interractive test
+backend - implementation of functional interractive testing, send of json file to fe, - issue solve storage of created tests + user creation
+
+FIXED:
+Report má obsahovať:
+  - Meno, priezvisko
+  - Názov projektu
+  - Tag vo Vašom GitHube, ktorý označuje reportovanú verziu Vášho projektu v tvare //version_week_(cislo)//, príklad: //version_week_5// pre prvý report
+  - Týždeň, za ktorý sa robí report, vo forme dátum od-do, príklad //5 týždeň: 18.3.2024 - 24.3.2024// v prvom reporte
+  - Čo ste plánovali spraviť za tento týždeň?
+  - Čo ste spravili za tento týždeň? (ku každej veci je nutné priradiť číslo commitu, ktorý ju implementuje - samostatný commit pre každú vec)
+  - Ak medzi prvým a druhým bodom sú nejaké rozdiely, tak prečo? 
+  - Aké sú Vaše plány na ďalší týždeň?
+  - S čím ste mali problémy? - ak nastali nejaké zmeny oproti špecifikácii, je povinné ich uviesť v tejto časti spolu so zdôvodnením.
+
+
+František Gábor
+
+medik_priprava
+
+//version_week_5 ??? neviem co sa tymto mysli
+
+1tyzden (prace) / week 5
+
+v prvom tyzdni bolo planovane: Konfigurácia vývojového prostredia: Nastavenie servera, databázy, a klienta podľa zvolených 
+technológií. Štúdia, čo všetko sa dá s AWS, poprípade zmena Technologických požiadaviek. 
+Základná štruktúra aplikácie: Implementácia základnej architektúry aplikácie, rozdelenie na 
+moduly/komponenty.
+
+v prvom tyzdni sa spravilo: nastavilo sa vyvojove prostredie (rds aws), zistilo sa ze google cloud bude lepsi pre nase ucely. Implementovala sa architektura aplikacie:
+done database implementation in postgres
+created script that takes data from csv (excel tables) and pushes them into database 
+tested aws rds creation system and connection - issue solve vpc groups, due to charges per creating one 
+basic frontend - used to test creating pdfs from test and creating simple interractive test
+backend - implementation of functional interractive testing, send of json file to fe, - issue solve storage of created tests + user creation
+
+v porovnani s poziadakami sme spravili len kusok kodenia navyse
+
+problemy: jediny problem mam s tym ako najdem commit history nech viem deklarovat kazdy bod commitom a co sa mysli pod tagovanim.
