@@ -1,0 +1,29 @@
+Report má obsahovať:
+  - Meno, priezvisko
+  - Názov projektu
+  - Tag vo Vašom GitHube, ktorý označuje reportovanú verziu Vášho projektu v tvare //version_week_(cislo)//, príklad: //version_week_5// pre prvý report
+  - Týždeň, za ktorý sa robí report, vo forme dátum od-do, príklad //5 týždeň: 18.3.2024 - 24.3.2024// v prvom reporte
+  - Čo ste plánovali spraviť za tento týždeň?
+  - Čo ste spravili za tento týždeň? (ku každej veci je nutné priradiť číslo commitu, ktorý ju implementuje - samostatný commit pre každú vec)
+  - Ak medzi prvým a druhým bodom sú nejaké rozdiely, tak prečo? 
+  - Aké sú Vaše plány na ďalší týždeň?
+  - S čím ste mali problémy? - ak nastali nejaké zmeny oproti špecifikácii, je povinné ich uviesť v tejto časti spolu so zdôvodnením.
+
+František Gábor
+medik_priprava
+not_tagged_yet -> will tag with week 8 (read below) 
+week 7
+
+V tomto tyzdni som planoval spravit pouzivatelske prostredie -> Autentifikácia usera, vytvaranie profilov atd. Plan bol nasledovny:
+
+7. týždeň: Autentifikácia a zabezpečenie 
+Autentifikácia používateľov: Implementácia registrácie, prihlásenia, a správy používateľských účtov. 
+Bezpečnostné opatrenia: Zabezpečenie komunikácie, ochrana pred bežnými útokmi. 
+8. týždeň: Frontend a integrácia 
+Vývoj frontendu: Implementácia užívateľského rozhrania podľa wireframe a designu. 
+Integrácia s backendom: Pripojenie klienta na server cez API, testovanie funkcionality. 
+
+Z dovodu choroby som ale radsej zacal robit week 8, kedze Autentifikácia a create of profile vyzaduju mozogovu kapacitu, ktoru som tento tyzden nemal.
+Takze stav je taky, ze mame nejaky krajsie vyzerajuci forntend (index page), mame to deploynute (skusobnu, ale funkcnu verziu na robenie testu, aj ked pomalu), teda znacna cast z tyzdna 8 je spravena,
+treba uz len kod viac strukturalizovat, opravit rozlozenie textu a pridat lepsiu responzivitu. Ak budem mat energiu spravim to este dnes a updatnem podla casu.
+Teda po zmene planu week 8: dokoncenie autentifikacie a zabezpecenia, zkraslenie frontendu, restrukturalizacia kodu. Tagnem to potom spolu s week 8 nech to je pokope, kedze toto je nepatrna zmena vzhladom na stranku.
