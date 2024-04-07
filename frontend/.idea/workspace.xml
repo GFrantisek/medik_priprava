@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="AutoImportSettings">
-    <option name="autoReloadType" value="SELECTIVE" />
-  </component>
   <component name="ChangeListManager">
-    <list default="true" id="6cddd35b-4ea6-43ae-b2da-c81064eeb764" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/pages/interaktivny_test.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/router/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../db/answers.csv" beforeDir="false" afterPath="$PROJECT_DIR$/../db/answers.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../db/answers.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/../db/answers.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../db/questions.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/../db/questions.xlsx" afterDir="false" />
+    <list default="true" id="3a6f176f-ba46-4489-83bd-8fe4bfac5d32" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/components/NavBar.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/login.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/registration.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nuxt.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/nuxt.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/interaktivny_test.vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/interaktivny_test.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,7 +21,6 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Vue Single File Component" />
-        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -30,7 +30,7 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectId" id="2du6pWcEEZe46IkrkxrZKQLb9fG" />
+  <component name="ProjectId" id="2eMBem0wStniQOpOhJXEfQT5aPx" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -40,63 +40,29 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/frant&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;npm.npm build.executor&quot;: &quot;Run&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\WebStorm 2023.3\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;,
-    &quot;vuejs.nuxt.types-notification-shown&quot;: &quot;true&quot;
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager" selected="npm.npm build">
-    <configuration name="npm build" type="js.build_tools.npm">
-      <package-json value="$PROJECT_DIR$/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="build" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
-    <configuration name="npm dev" type="js.build_tools.npm">
-      <package-json value="$PROJECT_DIR$/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="dev" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
-    <configuration name="npm start" type="js.build_tools.npm">
-      <package-json value="$PROJECT_DIR$/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="start" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\frant\WebstormProjects\medik_priprava_fe_deploy\assets\icons" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="6cddd35b-4ea6-43ae-b2da-c81064eeb764" name="Changes" comment="" />
-      <created>1710845800974</created>
+      <changelist id="3a6f176f-ba46-4489-83bd-8fe4bfac5d32" name="Changes" comment="" />
+      <created>1711704663500</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1710845800974</updated>
-      <workItem from="1710845803639" duration="7143000" />
-      <workItem from="1711116222592" duration="4024000" />
-      <workItem from="1711367499791" duration="592000" />
-      <workItem from="1711385013018" duration="2336000" />
-      <workItem from="1711393342603" duration="1260000" />
-      <workItem from="1711464387258" duration="3499000" />
-      <workItem from="1711703239761" duration="2213000" />
+      <updated>1711704663500</updated>
+      <workItem from="1711704664844" duration="2056000" />
+      <workItem from="1711717875755" duration="6644000" />
+      <workItem from="1711797579120" duration="5971000" />
+      <workItem from="1712046795815" duration="2833000" />
+      <workItem from="1712471394511" duration="590000" />
     </task>
     <servers />
   </component>

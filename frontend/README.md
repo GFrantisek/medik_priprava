@@ -1,4 +1,4 @@
-# frontend
+# medik_priprava_fe_deploy
 
 ## Build Setup
 

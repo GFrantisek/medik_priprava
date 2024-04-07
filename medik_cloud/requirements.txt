@@ -1,0 +1,8 @@
+django==4.2.10
+requests==2.31.0
+debugpy # Required for debugging.
+
+psycopg2-binary~=2.9.9
+fpdf~=1.7.2
+reportlab~=4.1.0
+utils~=1.0.2
