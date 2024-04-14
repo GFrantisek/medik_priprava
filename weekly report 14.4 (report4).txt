@@ -1,0 +1,34 @@
+8. týždeň: Frontend a integrácia
+Vývoj frontendu: Implementácia užívateľského rozhrania podľa wireframe a designu.
+Integrácia s backendom: Pripojenie klienta na server cez API, testovanie funkcionality.
+
+Report má obsahovať:
+  - Meno, priezvisko
+  - Názov projektu
+  - Tag vo Vašom GitHube, ktorý označuje reportovanú verziu Vášho projektu v tvare //version_week_(cislo)//, príklad: //version_week_5// pre prvý report
+  - Týždeň, za ktorý sa robí report, vo forme dátum od-do, príklad //5 týždeň: 18.3.2024 - 24.3.2024// v prvom reporte
+  - Čo ste plánovali spraviť za tento týždeň?
+  - Čo ste spravili za tento týždeň? (ku každej veci je nutné priradiť číslo commitu, ktorý ju implementuje - samostatný commit pre každú vec)
+  - Ak medzi prvým a druhým bodom sú nejaké rozdiely, tak prečo? 
+  - Aké sú Vaše plány na ďalší týždeň?
+  - S čím ste mali problémy? - ak nastali nejaké zmeny oproti špecifikácii, je povinné ich uviesť v tejto časti spolu so zdôvodnením.
+
+František Gábor
+medik_priprava
+tag week 8
+week 8
+
+V tomto tyzdni som povodne planoval:
+Vývoj frontendu: Implementácia užívateľského rozhrania podľa wireframe a designu.
+Integrácia s backendom: Pripojenie klienta na server cez API, testovanie funkcionality.
+
+Po zmene kvoli chorobe som ale robil week 7 -> autentifikacia zabezpecenie, ktore uz funguje 
+to zmanea vieme vytvorit superusera (admina) a usera (medaplicanta) v backende, teraz riesim a skusam do 
+konca dna doriesit integraciu s frontendom. Funguje to tak, ze backned si sam ked sa zaovla call so spravnou
+hlavickou uspesne vytvori a zapise user / admina do db, avsak po implementacii do fe, tak sa to odmieta pripojit,
+co riesim cez cors_headers zatial neuspesne, do konca dna na 99% uspesne.
+ 
+plany na buduci tyzden -> doladenie vsetkeho, restrukturalizacia, pridanie historie + povodne plany
+
+problemy -> i hate cors headers, kusok som mal problemy s gitom kedze pre deploynute verzie som vytvoril samostatne repa a tie nasledne sa snazim pacnut sem, to dorobim tiez asi na dalsi tyzden, kedze by som to chcel mat ako 4 foldre
+be -> local, deploy a fe -> local, deploy
