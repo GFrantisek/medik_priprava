@@ -1,0 +1,1 @@
+# medik_priprava_fe_deploy
