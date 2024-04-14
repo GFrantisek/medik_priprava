@@ -15,7 +15,7 @@ Report má obsahovať:
 
 František Gábor
 medik_priprava
-tag week 8
+tag week 8 (dnes to spravim, mozno az po 10tej hodine, kedze sa snazim riesit bugy a idealne chcem mat tag bez bugov)
 week 8
 
 V tomto tyzdni som povodne planoval:
@@ -32,3 +32,8 @@ plany na buduci tyzden -> doladenie vsetkeho, restrukturalizacia, pridanie histo
 
 problemy -> i hate cors headers, kusok som mal problemy s gitom kedze pre deploynute verzie som vytvoril samostatne repa a tie nasledne sa snazim pacnut sem, to dorobim tiez asi na dalsi tyzden, kedze by som to chcel mat ako 4 foldre
 be -> local, deploy a fe -> local, deploy
+
+poznama -> taktiez nastala zmena v databaze, kedze model v py umoznuje spravit dost pekne veci tak student_password je teraz len password field, pridal sa automaticky stlpec last login co bude nice mat, taktiez je password pekne
+hashnuty, pridam tam este salting, ale taktiez musim vyriesit dalsi tyzden az 2 nejake rozumne posielanie toho hesla z Fe cez prolly rest api or JWT, s tym ze to bude bezpecne a nebude sa to dat len tak odchytit a bude sa posielat len
+saltnuty password atd... citam si teraz o tom je to dost zaujimave, cize uvidime do akej hlbky sa mi to podari spravit. 
+ 
