@@ -7,9 +7,10 @@ from django.contrib import admin
 
 urlpatterns = [
 
-    path('', include('helloapp.urls')),
     path('generate-pdf/', generate_pdf, name='generate-pdf'),
     path('api/get_test_questions/', get_test_questions, name='get_test_questions'),
+    path('admin/', admin.site.urls),
+    path('api/auth/', include('helloapp.urls')),
 
 
 ]
