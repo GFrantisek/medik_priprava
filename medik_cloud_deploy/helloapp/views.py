@@ -1,20 +1,19 @@
 # helloapp views.py
-import json
-
-from django.shortcuts import render
-import os
-import requests
-
-from django.conf import settings
 import zipfile
 import os
 
+from . import serializers
+from .serializers import RegisterSerializer
 from .utils import fetch_questions_and_answers, create_pdf, connect_db, db_params, create_pdf_with_correct_answers
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
-from .models import MedApplicant
-from django.views.decorators.csrf import csrf_exempt
-
+from rest_framework import status as http_status, status
+from rest_framework import response
+from rest_framework import decorators as rest_decorators
+from rest_framework import status as http_status
+from rest_framework_simplejwt import serializers as jwt_serializers
+from rest_framework_simplejwt import views as jwt_views
+from rest_framework import permissions as rest_permissions
 
 # Utility function for setting CORS headers
 def cors_headers(view_func):
@@ -106,21 +105,32 @@ def generate_pdf(request):
                             content_type="text/plain")
 
 
-@cors_headers
-def signup(request):
-    if request.method == "POST":
-        data = json.loads(request.body)
-        student_name = data.get('name')
-        student_email = data.get('email')
-        password = data.get('password')
-        try:
-            user = MedApplicant.objects.create_user(
-                student_email=student_email,
-                student_name=student_name,
-                password=password
-            )
-            return JsonResponse({'status': 'success', 'message': 'User registered successfully'})
-        except Exception as e:
-            return JsonResponse({'status': 'error', 'message': str(e)}, status=400)
-    else:
-        return HttpResponse({'status': 'success', 'message': 301})
+@rest_decorators.api_view(['POST'])
+@rest_decorators.permission_classes([])
+def register(request):
+    serializer = serializers.RegisterSerializer(data=request.data)
+    serializer.is_valid(raise_exception=True)
+
+    user = serializer.save()
+    return response.Response(status=http_status.HTTP_201_CREATED)
+
+
+class AccountTokenObtainPairViewSerializer(jwt_serializers.TokenObtainPairSerializer):
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
+
+        token['username'] = user.username
+
+        return token
+
+
+class AccountTokenObtainPairView(jwt_views.TokenObtainPairView):
+    serializer_class = AccountTokenObtainPairViewSerializer
+
+
+@rest_decorators.api_view(['GET'])
+@rest_decorators.permission_classes([rest_permissions.IsAuthenticated])
+def detail(request):
+    serializer = serializers.AccountSerializer(request.user)
+    return response.Response({"user": serializer.data})
