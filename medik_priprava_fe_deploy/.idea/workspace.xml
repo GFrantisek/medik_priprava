@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="3a6f176f-ba46-4489-83bd-8fe4bfac5d32" name="Changes" comment="creation of fe deploy" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+        <option value="Vue Single File Component" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2eMBem0wStniQOpOhJXEfQT5aPx" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/frant&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\WebStorm 2022.2\\plugins\\JavaScriptLanguage\\jsLanguageServicesImpl\\external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\frant\WebstormProjects\medik_priprava_fe_deploy\assets\icons" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3a6f176f-ba46-4489-83bd-8fe4bfac5d32" name="Changes" comment="" />
+      <created>1711704663500</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1711704663500</updated>
+      <workItem from="1711704664844" duration="2056000" />
+      <workItem from="1711717875755" duration="6644000" />
+      <workItem from="1711797579120" duration="5971000" />
+      <workItem from="1712046795815" duration="2833000" />
+      <workItem from="1712471394511" duration="1218000" />
+      <workItem from="1712649261204" duration="595000" />
+      <workItem from="1712754965321" duration="1815000" />
+      <workItem from="1712994436062" duration="5011000" />
+      <workItem from="1713030813408" duration="10431000" />
+      <workItem from="1713082405645" duration="1526000" />
+      <workItem from="1713189704555" duration="951000" />
+      <workItem from="1713529501594" duration="626000" />
+    </task>
+    <task id="LOCAL-00001" summary="creation of fe deploy">
+      <created>1713081637945</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1713081637945</updated>
+    </task>
+    <task id="LOCAL-00002" summary="creation of fe deploy">
+      <created>1713082418720</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1713082418720</updated>
+    </task>
+    <task id="LOCAL-00003" summary="creation of fe deploy">
+      <created>1713189767938</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1713189767938</updated>
+    </task>
+    <task id="LOCAL-00004" summary="creation of fe deploy">
+      <created>1713190032709</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1713190032709</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="creation of fe deploy" />
+    <option name="LAST_COMMIT_MESSAGE" value="creation of fe deploy" />
+  </component>
+</project>

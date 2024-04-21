@@ -6,7 +6,10 @@ from helloapp.models import MedApplicant
 
 
 class RegisterSerializer(serializers.Serializer):
-    password2 = serializers.CharField(style={'input_type': 'password'},write_only=True)
+    email = serializers.EmailField()  # Add this
+    username = serializers.CharField()  # Add this
+    password = serializers.CharField(write_only=True)
+    password2 = serializers.CharField(style={'input_type': 'password'}, write_only=True)
 
     class Meta:
         model = MedApplicant
@@ -14,21 +17,14 @@ class RegisterSerializer(serializers.Serializer):
         extra_kwargs = {'password': {'write_only': True}}
 
     def save(self, **kwargs):
-        user = MedApplicant(email=self.validated_data['email'], student_name=self.validated_data['student_name'])
+        if self.validated_data['password'] != self.validated_data['password2']:
+            raise serializers.ValidationError({"password": "Passwords do not match"})
 
-        password = self.validated_data['password']
-        password2 = self.validated_data['password2']
-
-        if password != password2:
-            raise serializers.ValidationError({
-                'password': 'Passwords do not match'
-            })
-
-        user.set_password(password)
+        user = MedApplicant(email=self.validated_data['email'], username=self.validated_data['username'])
+        user.set_password(self.validated_data['password'])
         user.save()
 
         return user
-
 
 class AccountSerializer(serializers.ModelSerializer):
     class Meta:

@@ -2,6 +2,8 @@
 import zipfile
 import os
 
+from django.core.mail.backends import console
+
 from . import serializers
 from .serializers import RegisterSerializer
 from .utils import fetch_questions_and_answers, create_pdf, connect_db, db_params, create_pdf_with_correct_answers
@@ -14,6 +16,7 @@ from rest_framework import status as http_status
 from rest_framework_simplejwt import serializers as jwt_serializers
 from rest_framework_simplejwt import views as jwt_views
 from rest_framework import permissions as rest_permissions
+
 
 # Utility function for setting CORS headers
 def cors_headers(view_func):
@@ -54,6 +57,7 @@ def get_request_params(request, param_defaults=None):
 
 @cors_headers
 def get_test_questions(request):
+
     params = get_request_params(request)
     conn = connect_db(db_params)
     # Adjust the below line as needed based on your actual function's parameters
@@ -109,10 +113,18 @@ def generate_pdf(request):
 @rest_decorators.permission_classes([])
 def register(request):
     serializer = serializers.RegisterSerializer(data=request.data)
-    serializer.is_valid(raise_exception=True)
-
-    user = serializer.save()
-    return response.Response(status=http_status.HTTP_201_CREATED)
+    if serializer.is_valid():
+        user = serializer.save()
+        return response.Response(
+            {
+                "user_id": user.id,
+                "email": user.email,
+                "username": user.username  # Assuming you want to return this as well
+            },
+            status=http_status.HTTP_201_CREATED
+        )
+    else:
+        return response.Response(serializer.errors, status=http_status.HTTP_400_BAD_REQUEST)
 
 
 class AccountTokenObtainPairViewSerializer(jwt_serializers.TokenObtainPairSerializer):

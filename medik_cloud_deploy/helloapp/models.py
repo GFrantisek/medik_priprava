@@ -42,13 +42,14 @@ class MedApplicant(AbstractBaseUser):
     updated_at = models.DateTimeField(auto_now=True)
     last_login_at = models.DateTimeField(auto_now=True)
 
-    objects = MedApplicantManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username']
+    REQUIRED_FIELDS = ('username',)
 
-    def __str__(self):
-        return self.student_email
+    objects = MedApplicantManager()
+
+    def __str__(self) -> str:
+        return self.username
 
     def has_perm(self, perm, obj=None):
         return True
