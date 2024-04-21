@@ -25,34 +25,68 @@ def connect_db(params):
 
 
 # Fetch questions and answers
-def fetch_questions_and_answers(conn, num_questions, start_question, end_question):
-    print("test")
+def fetch_questions_and_answers(conn, num_questions, start_question, end_question, num_answers, categories=[]):
     with conn.cursor() as cur:
-        cur.execute("""
-                    SELECT question_id, question_text
-                    FROM MedQuestions
-                    WHERE question_id BETWEEN %s AND %s
-                    ORDER BY RANDOM()
-                    LIMIT %s;
-                """, (start_question, end_question, num_questions))
-        questions = cur.fetchall()
 
-        question_answers = {}
-        for question_id, question_text in questions:
+        if categories.__len__() == 0:
             cur.execute("""
-                SELECT answer_id, answer_text, is_correct
-                FROM MedAnswers
-                WHERE question_id = %s
+                               SELECT question_id, question_text
+                               FROM MedQuestions
+                               WHERE question_id BETWEEN %s AND %s
+                               ORDER BY RANDOM()
+                               LIMIT %s;
+                           """, (start_question, end_question, num_questions))
+            questions = cur.fetchall()
+
+            question_answers = {}
+            for question_id, question_text in questions:
+                cur.execute("""
+                           SELECT answer_id, answer_text, is_correct
+                           FROM MedAnswers
+                           WHERE question_id = %s  
+                           ORDER BY RANDOM()
+                           LIMIT %s;
+                       """, (question_id, num_answers))
+                answers = cur.fetchall()
+                question_answers[question_id] = {
+                    'text': question_text,
+                    'answers': answers
+                }
+        else:
+            category_placeholders = ', '.join(['%s'] * len(categories))  # Correctly prepare placeholders
+            sql_query = f"""
+                SELECT question_id, question_text
+                FROM MedQuestions
+                WHERE question_id BETWEEN %s AND %s
+                AND question_category IN ({category_placeholders})
                 ORDER BY RANDOM()
-                LIMIT 4;
-            """, (question_id,))
-            answers = cur.fetchall()
-            question_answers[question_id] = {
-                'text': question_text,
-                'answers': answers
-            }
-    return question_answers
-    pass
+                LIMIT %s;
+            """
+            cur.execute(sql_query, (start_question, end_question, *categories, num_questions))
+
+            questions = cur.fetchall()
+
+            question_answers = {}
+            for question_id, question_text in questions:
+                cur.execute("""
+                            SELECT answer_id, answer_text, is_correct
+                            FROM MedAnswers
+                            WHERE question_id = %s
+                            ORDER BY RANDOM()
+                            LIMIT %s;
+                        """, (question_id, num_answers))
+                answers = cur.fetchall()
+                question_answers[question_id] = {
+                    'text': question_text,
+                    'answers': answers
+                }
+
+
+        return question_answers
+        pass
+
+
+
 
 
 class PDF(fpdf.FPDF):

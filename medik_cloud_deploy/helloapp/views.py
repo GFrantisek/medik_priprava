@@ -51,18 +51,28 @@ def aboutpage(request):
 
 def get_request_params(request, param_defaults=None):
     if param_defaults is None:
-        param_defaults = {'numQuestions': '100', 'startQuestion': '1', 'endQuestion': '200'}
-    return {param: int(request.GET.get(param, default)) for param, default in param_defaults.items()}
+        param_defaults = {
+            'numQuestions': '100',
+            'startQuestion': '1',
+            'endQuestion': '200',
+            'numAnswers': '4',  # Default number of answers
+            'categories': ''  # Default empty category list
+        }
+    return {param: request.GET.get(param, default) for param, default in param_defaults.items()}
 
 
 @cors_headers
 def get_test_questions(request):
-
     params = get_request_params(request)
+    categories = params['categories'].split(',') if params['categories'] else []
     conn = connect_db(db_params)
     # Adjust the below line as needed based on your actual function's parameters
-    questions_and_answers = fetch_questions_and_answers(conn, params['numQuestions'], params['startQuestion'],
-                                                        params['endQuestion'])
+    questions_and_answers = fetch_questions_and_answers(conn,
+            params['numQuestions'],
+            params['startQuestion'],
+            params['endQuestion'],
+            params['numAnswers'],
+            categories)
     conn.close()
     return JsonResponse(questions_and_answers)
 
@@ -72,8 +82,14 @@ def generate_pdf(request):
     try:
         params = get_request_params(request)
         conn = connect_db(db_params)
-        question_answers = fetch_questions_and_answers(conn, params['numQuestions'], params['startQuestion'],
-                                                       params['endQuestion'])
+        categories = params['categories'].split(',') if params['categories'] else []
+        question_answers = fetch_questions_and_answers(conn,
+                                                            params['numQuestions'],
+                                                            params['startQuestion'],
+                                                            params['endQuestion'],
+                                                            params['numAnswers'],
+                                                            categories)
+
         conn.close()
 
         pdf_directory = os.path.join(os.path.dirname(__file__), 'pdfs')

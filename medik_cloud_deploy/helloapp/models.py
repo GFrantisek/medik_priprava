@@ -56,3 +56,74 @@ class MedApplicant(AbstractBaseUser):
 
     def has_module_perms(self, app_label):
         return True
+
+class MedTestTemplate(models.Model):
+    test_template_id = models.AutoField(primary_key=True)
+    template_name = models.TextField()
+    template_description = models.TextField()
+
+    class Meta:
+        db_table = 'med_test_templates'
+
+class MedQuestions(models.Model):
+    question_id = models.AutoField(primary_key=True)
+    question_text = models.TextField()
+    question_image = models.TextField(null=True, blank=True)
+    question_category = models.CharField(max_length=255)
+
+    class Meta:
+        db_table = 'medquestions'
+
+class MedAnswers(models.Model):
+    answer_id = models.AutoField(primary_key=True)
+    answer_text = models.TextField()
+    answer_image = models.TextField(null=True, blank=True)
+    question_id = models.ForeignKey(MedQuestions, related_name='answers', on_delete=models.CASCADE)
+    is_correct = models.BooleanField()
+    explanation = models.TextField(null=True, blank=True)
+    selection_count = models.IntegerField(default=0)
+
+    class Meta:
+        db_table = 'medanswers'
+class StudentTests(models.Model):
+    test_id = models.AutoField(primary_key=True)
+    student_id = models.ForeignKey(
+        'MedApplicant',
+        on_delete=models.CASCADE,
+        db_column='id'
+    )
+    test_template_id = models.ForeignKey(
+        'MedTestTemplate',
+        on_delete=models.CASCADE,
+        db_column='test_template_id'
+    )
+    test_date = models.DateTimeField(auto_now_add=True, db_column='test_date')
+    score = models.IntegerField(db_column='score')
+    total_possible_score = models.IntegerField(db_column='total_possible_score')
+
+
+class Meta:
+        db_table = 'student_tests'
+
+class StudentAnswers(models.Model):
+    student_answer_id = models.AutoField(primary_key=True)
+    test = models.ForeignKey(
+        'StudentTests',
+        on_delete=models.CASCADE,
+        db_column='test_id',
+        related_name='answers'
+    )
+    question = models.ForeignKey(
+        MedQuestions,
+        on_delete=models.CASCADE,
+        db_column='question_id'
+    )
+    selected_answer = models.ForeignKey(
+        MedAnswers,
+        on_delete=models.CASCADE,
+        db_column='selected_answer_id'
+    )
+    is_correct = models.BooleanField()
+
+    class Meta:
+        db_table = 'student_answers'
