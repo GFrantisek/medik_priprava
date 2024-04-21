@@ -1,0 +1,32 @@
+9. týždeň: Funkcionality a testovanie 
+
+
+František Gábor
+medik_priprava
+tag beta
+week 9
+
+V tomto tyzdni som povodne planoval:
+Rozšírenie funkcionality: Dokončenie prací na kľúčových funkcionalitách aplikácie. 
+Testovanie: Unit testy, integráciu testy, a manuálne testovanie celej aplikácie pre identifikáciu a 
+opravu chýb.
+
+Pracoval som na uprave authentication of user (treti tyzden, problem bol v corse headers as expected, presieil som na pouzivianie restapi) [poznamka pod ciarou ja som tak rad, ze to funguje kedze authentication som robil prvykrat and it was paaain, to malo tolko bugov, ze keby pisem knihu tak ma 500 starn]. Taktiez som robil mensie upravy frotnendu, menil som urlcka tak aby sa to odkazovalo na backend. Upravoval a doplnoval som veci do db.
+
+chybajuce veci ktore chcem pridat pocas tohto tyzdna -> stiahnutie pdf po vytoreni [staci v deploy verzii povolit post pre jednu metodu]
+historia pre pouzivatela
+lepsi frontned -> reactivity
+
+dosiel som k zaveru, ze pouzijem testovanie mecom, kedze absolutne nestiham otestuju to pouzivatelia, popripade week 11, kedze nestiham pisat normalizovane testy, avsak manualne som si to presiel na localnej verzii tamfunguej vsteko az na jeden download button.
+
+
+Report má obsahovať:
+  - Meno, priezvisko
+  - Názov projektu
+  - Tag vo Vašom GitHube, ktorý označuje reportovanú verziu Vášho projektu v tvare //version_week_(cislo)//, príklad: //version_week_5// pre prvý report
+  - Týždeň, za ktorý sa robí report, vo forme dátum od-do, príklad //5 týždeň: 18.3.2024 - 24.3.2024// v prvom reporte
+  - Čo ste plánovali spraviť za tento týždeň?
+  - Čo ste spravili za tento týždeň? (ku každej veci je nutné priradiť číslo commitu, ktorý ju implementuje - samostatný commit pre každú vec)
+  - Ak medzi prvým a druhým bodom sú nejaké rozdiely, tak prečo? 
+  - Aké sú Vaše plány na ďalší týždeň?
+  - S čím ste mali problémy? - ak nastali nejaké zmeny oproti špecifikácii, je povinné ich uviesť v tejto časti spolu so zdôvodnením.
