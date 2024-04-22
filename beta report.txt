@@ -1,0 +1,41 @@
+ František Gábor
+ medik príprava
+ https://github.com/GFrantisek/medik_priprava all together, taktiež https://github.com/GFrantisek/medik_priprava_fe_deploy deployed frontend   -> repozitar  !! tag sade dam beta_projekt
+ https://testovisko.netlify.app/ -> verejna instancia projektu
+ 
+ Docker file co sa tyka backendu by mal byt zakomponovany rovno. Postup na rozbehanie stacilo by si naklonovat obe prostredia v hlavnom gite je kusok zmatok netreba sa toho bat. Hlavne subory su medik_priprava_fe_deploy/.idea alebo odporucam skor si naklonoat cele -> https://github.com/GFrantisek/medik_priprava_fe_deploy to je frontendova cast. Staci velmi jednoducho npm install -> npm run dev a mame local vyvojove prostredie na fe.
+Backend odporucam https://github.com/GFrantisek/medik_priprava a nasledne si clonnut medik_cloud_deploy file. Taktiez ak sa pohybujeme  pycharm prostredi je super mat google cloud plugin, cez ktory si vytvorime run enviroment ako django local app. Taktiez je nutne aj pre lokalne spustenie mat docker.
+Databaza -> udaje na pripojenie su dostupne  backende, momentalne runuje na aws serveroch. Host -> medicina.cp4mikq0waak.eu-north-1.rds.amazonaws.com 
+											   Port -> 5432	
+											   User -> madmin
+											   Database -> medicina
+											   Pass -> Skola2011xT
+
+
+
+features 
+ ->
+FUNCTIONAL:
+authentication of user -> login/register
+creation of test according to own preferenes, vyber otazok od do, vyber odpovedi, ohodnotenie atd...
+(python script na inserciu a mazanie otazok a odpovedi z csv do db)
+moznost stiahnut si test namiesto generovania online
+
+ROZPRACOVANE:
+historia testov pouzivatela, (ukladanie do db a perzeranie si)
+vyber oblasti testov, (pravdepodobne chyba v SQL kode ktory runujem)
+stiahnutie si uz vypracovaneho online 
+ukladanie statistik o vypracovanych testoch 
+
+NEIMPLEMENTOVANE:
+admin prostredie for now, kedze insercia a meneneie otazok sa da chytro riesit cez script hore
+sprava profilu -> right now tam len zobrazujeme jeho meno
+
+plany:
+zhrniem asi plany na nasledujuce 2 tyzdne -> dokoncit rozracovane, spravit neimplementoane, plus skarslit frotnend, vyzera to hrozne
+plus da sa tam robit este giga vela veci, napr z databazeoveho hladiska som tam implementoval databazu tych otazok cez ocr, teda stane sa ze otazka vyzera ako
+??ot?azka 1: ... atd co je celkom neprijemne cize asi len vytvorim neajky script ktory to prebehne a znormalizuje. taktiez vytvorit funkcne prekliky na ine lf kde na kazdom by boli info
+o tych danych prijmackach a ich db otazok atd atd. Uvidime co stihnem hlane je spravit neimplementovane dokoncit rozpracovane
+
+problemy:
+i hate authentication. To bola asi najhorsia cast kedze som to predtym nerobil nikdy. Taktiez pravdepodobne budem mat problem linknut historiu k uzivatelovi.
