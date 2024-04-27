@@ -1,10 +1,13 @@
 # helloapp views.py
 import zipfile
 import os
+from datetime import timezone
 
 from django.core.mail.backends import console
+from rest_framework.decorators import api_view
 
 from . import serializers
+from .models import StudentTests, StudentAnswers, MedAnswers
 from .serializers import RegisterSerializer
 from .utils import fetch_questions_and_answers, create_pdf, connect_db, db_params, create_pdf_with_correct_answers
 from django.shortcuts import render
@@ -162,3 +165,32 @@ class AccountTokenObtainPairView(jwt_views.TokenObtainPairView):
 def detail(request):
     serializer = serializers.AccountSerializer(request.user)
     return response.Response({"user": serializer.data})
+
+
+@api_view(['POST'])
+def submit_answers(request):
+    student_test = StudentTests.objects.create(
+        student_id=request.user.id,  # assuming the user is authenticated
+        test_template_id=request.data['test_template_id'],
+        test_date=timezone.now(),
+        score=0,  # Initialize score, calculate after all answers are submitted
+        total_possible_score=request.data['total_possible_score']
+    )
+
+    answers = request.data['answers']
+    for answer in answers:
+        StudentAnswers.objects.create(
+            test=student_test,
+            question_id=answer['question_id'],
+            selected_answer_id=answer['answer_id'],
+            is_correct=answer['is_correct']
+        )
+
+        # Optionally increment selection_count
+        selected_answer = MedAnswers.objects.get(id=answer['answer_id'])
+        selected_answer.selection_count += 1
+        selected_answer.save()
+
+    # Here, calculate the score based on correct answers if needed
+
+    return response.Response(status=status.HTTP_201_CREATED)

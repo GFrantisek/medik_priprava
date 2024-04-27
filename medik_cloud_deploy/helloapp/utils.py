@@ -85,10 +85,6 @@ def fetch_questions_and_answers(conn, num_questions, start_question, end_questio
         return question_answers
         pass
 
-
-
-
-
 class PDF(fpdf.FPDF):
     def header(self):
         pass

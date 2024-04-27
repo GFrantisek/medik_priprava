@@ -6,8 +6,8 @@ from helloapp.models import MedApplicant
 
 
 class RegisterSerializer(serializers.Serializer):
-    email = serializers.EmailField()  # Add this
-    username = serializers.CharField()  # Add this
+    email = serializers.EmailField()  
+    username = serializers.CharField()
     password = serializers.CharField(write_only=True)
     password2 = serializers.CharField(style={'input_type': 'password'}, write_only=True)
 

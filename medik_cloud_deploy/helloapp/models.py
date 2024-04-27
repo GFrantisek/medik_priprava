@@ -42,7 +42,6 @@ class MedApplicant(AbstractBaseUser):
     updated_at = models.DateTimeField(auto_now=True)
     last_login_at = models.DateTimeField(auto_now=True)
 
-
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ('username',)
 
@@ -57,6 +56,7 @@ class MedApplicant(AbstractBaseUser):
     def has_module_perms(self, app_label):
         return True
 
+
 class MedTestTemplate(models.Model):
     test_template_id = models.AutoField(primary_key=True)
     template_name = models.TextField()
@@ -64,6 +64,7 @@ class MedTestTemplate(models.Model):
 
     class Meta:
         db_table = 'med_test_templates'
+
 
 class MedQuestions(models.Model):
     question_id = models.AutoField(primary_key=True)
@@ -73,6 +74,7 @@ class MedQuestions(models.Model):
 
     class Meta:
         db_table = 'medquestions'
+
 
 class MedAnswers(models.Model):
     answer_id = models.AutoField(primary_key=True)
@@ -85,6 +87,8 @@ class MedAnswers(models.Model):
 
     class Meta:
         db_table = 'medanswers'
+
+
 class StudentTests(models.Model):
     test_id = models.AutoField(primary_key=True)
     student_id = models.ForeignKey(
@@ -103,7 +107,8 @@ class StudentTests(models.Model):
 
 
 class Meta:
-        db_table = 'student_tests'
+    db_table = 'student_tests'
+
 
 class StudentAnswers(models.Model):
     student_answer_id = models.AutoField(primary_key=True)

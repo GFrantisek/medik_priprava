@@ -1,0 +1,34 @@
+10. týždeň: Spracovanie feedbacku 
+
+
+František Gábor
+medik_priprava
+tag -> ak spravim vacsi pokrok to tagnem
+week 10
+
+V tomto tyzdni som povodne planoval:
+10+ presentácia, bugfixes, oprava podľa feedbacku ... 
+
+Spravil som a praujem na:
+Pracujem na dokonceni zacateho, riesim opravu generovania toho isteho pdf, historii testov atd. V podstate vsetko naraz. Kedze ale generovanie je pomale (kvoli tomu ze to riesim priamim callom na db a nie cez models a tieto srandy) (just working theory), tak sa pohravam s moznostou redo utils na modelovu tematiku. Skusil som nejaky letmy nacrt toho ako by fungovalo ukladanie ... nefunguje. Cize este zajtra sa budem hrat s db remodleingom a historiou. Github push spravim pravdepodobne ak by to nebol problem az dalsi tyzden, lebo nechcem pushovat veci ktore nefunguju kedze mam prepojene pushe na deploy.
+
+Plany:
+Pravdepodobne motto na dalsie tyzdne zostava nezmenene: Dokoncit rozpracovane, spravit nespravene.
+
+Problemy:
+deficit spanku, vela povinnosti k statniciam a bc, mam v hlave riesenia na vsetky problemy aj ako to spravit, ale najst si cas bol a bude najvacsi problem nasledujucich dni a tyzdnov. Ale zatial stigam vsetko :). Mozno mensi problem
+neviem presne ako sa vola termin toho, ze ak ma clovek stranku tak si vie zobrazit zdrojovy kod tej stranky, no a ten kod moze mat krasnu html podobu, alebo pri vue apkach je problem, ze je in-line, co nasledne dodrbava page-rank
+algorithm a ta stranka sa strati v google vyhladavani. Neviem ako sa vola metoda pre lepsie zobrazenie toho kodu na live deploy serveriku. Napr si to vie clovek pozriet dosloa na view-source:https://testovisko.netlify.app/, ze ten source 
+code je tak divne in-line. Ale neviem o tom poriadne najst veci, lebo neviem ako sa vola ta metoda / proces / problem.
+
+
+Report má obsahovať:
+  - Meno, priezvisko
+  - Názov projektu
+  - Tag vo Vašom GitHube, ktorý označuje reportovanú verziu Vášho projektu v tvare //version_week_(cislo)//, príklad: //version_week_5// pre prvý report
+  - Týždeň, za ktorý sa robí report, vo forme dátum od-do, príklad //5 týždeň: 18.3.2024 - 24.3.2024// v prvom reporte
+  - Čo ste plánovali spraviť za tento týždeň?
+  - Čo ste spravili za tento týždeň? (ku každej veci je nutné priradiť číslo commitu, ktorý ju implementuje - samostatný commit pre každú vec)
+  - Ak medzi prvým a druhým bodom sú nejaké rozdiely, tak prečo? 
+  - Aké sú Vaše plány na ďalší týždeň?
+  - S čím ste mali problémy? - ak nastali nejaké zmeny oproti špecifikácii, je povinné ich uviesť v tejto časti spolu so zdôvodnením.
