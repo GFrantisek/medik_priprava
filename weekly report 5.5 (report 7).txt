@@ -1,0 +1,36 @@
+11. týždeň: Spracovanie feedbacku a spracovanie pocitaca
+
+
+**DISCLAIMER**
+mensi problem -> vypol sa mi pc (uz pri prezentacii beta verzie strajkoval)-> teraz uz oficialne spinka navzdy, az kym mu nevymenim baterku / grafiku zalezi co crashlo. Teda som musel nastavovat nove prostredie atd na stolovom kompe. 
+
+František Gábor
+medik_priprava
+tag -> ak spravim vacsi pokrok to tagnem
+week 11
+
+V tomto tyzdni som povodne planoval:
+10+ presentácia, bugfixes, oprava podľa feedbacku ... (including11)
+
+Spravil som a praujem na:
+Oproti tyzdnu 10 sa nezmenilo vela, ale nastal znacny pokrok uz to nacitva test <1sekundu, kedze som genius a opravil som si backlend. Taktiez som sa hral s historiou
+
+Plany:
+Pravdepodobne motto na dalsie tyzdne zostava nezmenene: Dokoncit rozpracovane, spravit nespravene. Motto nezmeneme
+
+Problemy:
+crash pc,
+hladam rendering vo vuecku,
+hlbsie premysliet historiu
+
+
+Report má obsahovať:
+  - Meno, priezvisko
+  - Názov projektu
+  - Tag vo Vašom GitHube, ktorý označuje reportovanú verziu Vášho projektu v tvare //version_week_(cislo)//, príklad: //version_week_5// pre prvý report
+  - Týždeň, za ktorý sa robí report, vo forme dátum od-do, príklad //5 týždeň: 18.3.2024 - 24.3.2024// v prvom reporte
+  - Čo ste plánovali spraviť za tento týždeň?
+  - Čo ste spravili za tento týždeň? (ku každej veci je nutné priradiť číslo commitu, ktorý ju implementuje - samostatný commit pre každú vec)
+  - Ak medzi prvým a druhým bodom sú nejaké rozdiely, tak prečo? 
+  - Aké sú Vaše plány na ďalší týždeň?
+  - S čím ste mali problémy? - ak nastali nejaké zmeny oproti špecifikácii, je povinné ich uviesť v tejto časti spolu so zdôvodnením.

@@ -2,11 +2,25 @@ from rest_framework import serializers
 
 from django.conf import settings
 
-from helloapp.models import MedApplicant
+from helloapp.models import MedApplicant, StudentAnswers, StudentTests
+
+
+class StudentAnswersSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = StudentAnswers
+        fields = ['question', 'selected_answer', 'is_correct']
+
+
+class StudentTestsSerializer(serializers.ModelSerializer):
+    answers = StudentAnswersSerializer(many=True)
+
+    class Meta:
+        model = StudentTests
+        fields = ['test_id', 'test_template_id', 'test_date', 'score', 'total_possible_score', 'answers']
 
 
 class RegisterSerializer(serializers.Serializer):
-    email = serializers.EmailField()  
+    email = serializers.EmailField()
     username = serializers.CharField()
     password = serializers.CharField(write_only=True)
     password2 = serializers.CharField(style={'input_type': 'password'}, write_only=True)
@@ -25,6 +39,7 @@ class RegisterSerializer(serializers.Serializer):
         user.save()
 
         return user
+
 
 class AccountSerializer(serializers.ModelSerializer):
     class Meta:

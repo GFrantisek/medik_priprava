@@ -8,7 +8,7 @@ from rest_framework.decorators import api_view
 
 from . import serializers
 from .models import StudentTests, StudentAnswers, MedAnswers
-from .serializers import RegisterSerializer
+from .serializers import RegisterSerializer, StudentTestsSerializer
 from .utils import fetch_questions_and_answers, create_pdf, connect_db, db_params, create_pdf_with_correct_answers
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
@@ -19,6 +19,10 @@ from rest_framework import status as http_status
 from rest_framework_simplejwt import serializers as jwt_serializers
 from rest_framework_simplejwt import views as jwt_views
 from rest_framework import permissions as rest_permissions
+from rest_framework.response import Response
+from rest_framework import views, status
+from django.http import JsonResponse
+from django.db import connection
 
 
 # Utility function for setting CORS headers
@@ -64,20 +68,106 @@ def get_request_params(request, param_defaults=None):
     return {param: request.GET.get(param, default) for param, default in param_defaults.items()}
 
 
-@cors_headers
+class TestHistoryView(views.APIView):
+    def get(self, request):
+        user_id = request.user.id  # Assumes user authentication is managed
+        tests = StudentTests.objects.filter(student_id=user_id)
+        serializer = StudentTestsSerializer(tests, many=True)
+        return Response(serializer.data)
+
+
+from django.http import JsonResponse
+from django.db import connection
+from rest_framework.decorators import api_view
+
+@api_view(['GET'])
 def get_test_questions(request):
-    params = get_request_params(request)
-    categories = params['categories'].split(',') if params['categories'] else []
-    conn = connect_db(db_params)
-    # Adjust the below line as needed based on your actual function's parameters
-    questions_and_answers = fetch_questions_and_answers(conn,
-            params['numQuestions'],
-            params['startQuestion'],
-            params['endQuestion'],
-            params['numAnswers'],
-            categories)
-    conn.close()
-    return JsonResponse(questions_and_answers)
+    num_questions = int(request.GET.get('numQuestions', 100))
+    start_question = int(request.GET.get('startQuestion', 1))
+    end_question = int(request.GET.get('endQuestion', 200))
+    num_answers = int(request.GET.get('numAnswers', 4))
+    categories = request.GET.get('categories', '').split(',') if request.GET.get('categories') else []
+
+    with connection.cursor() as cursor:
+        # Define a CTE to select random questions
+        sql_query = """
+        WITH RandomQuestions AS (
+            SELECT question_id, question_text
+            FROM MedQuestions
+            WHERE question_id BETWEEN %s AND %s
+        """
+        if categories:
+            sql_query += " AND question_category IN (%s)" + ", %s" * (len(categories) - 1)
+            sql_query += """
+            ORDER BY RANDOM()
+            LIMIT %s
+        ), RankedAnswers AS (
+            SELECT 
+                answer_id, 
+                answer_text, 
+                is_correct, 
+                question_id,
+                ROW_NUMBER() OVER (PARTITION BY question_id ORDER BY RANDOM()) as rn
+            FROM MedAnswers
+            WHERE question_id IN (SELECT question_id FROM RandomQuestions)
+        )
+        SELECT 
+            q.question_id, 
+            q.question_text, 
+            a.answer_id, 
+            a.answer_text, 
+            a.is_correct
+        FROM RandomQuestions q
+        JOIN RankedAnswers a ON q.question_id = a.question_id
+        WHERE a.rn <= %s
+        """
+            params = [start_question, end_question] + categories + [num_questions, num_answers]
+        else:
+            sql_query += """
+            ORDER BY RANDOM()
+            LIMIT %s
+        ), RankedAnswers AS (
+            SELECT 
+                answer_id, 
+                answer_text, 
+                is_correct, 
+                question_id,
+                ROW_NUMBER() OVER (PARTITION BY question_id ORDER BY RANDOM()) as rn
+            FROM MedAnswers
+            WHERE question_id IN (SELECT question_id FROM RandomQuestions)
+        )
+        SELECT 
+            q.question_id, 
+            q.question_text, 
+            a.answer_id, 
+            a.answer_text, 
+            a.is_correct
+        FROM RandomQuestions q
+        JOIN RankedAnswers a ON q.question_id = a.question_id
+        WHERE a.rn <= %s
+        """
+            params = [start_question, end_question, num_questions, num_answers]
+
+        cursor.execute(sql_query, params)
+        rows = cursor.fetchall()
+
+    # Process the fetched data into a structured dictionary
+    questions = {}
+    for row in rows:
+        question_id, question_text, answer_id, answer_text, is_correct = row
+        if question_id not in questions:
+            questions[question_id] = {
+                'question_id': question_id,
+                'question_text': question_text,
+                'answers': []
+            }
+        questions[question_id]['answers'].append({
+            'answer_id': answer_id,
+            'answer_text': answer_text,
+            'is_correct': is_correct
+        })
+
+    return JsonResponse({'questions': list(questions.values())})
 
 
 @cors_headers
@@ -87,11 +177,11 @@ def generate_pdf(request):
         conn = connect_db(db_params)
         categories = params['categories'].split(',') if params['categories'] else []
         question_answers = fetch_questions_and_answers(conn,
-                                                            params['numQuestions'],
-                                                            params['startQuestion'],
-                                                            params['endQuestion'],
-                                                            params['numAnswers'],
-                                                            categories)
+                                                       params['numQuestions'],
+                                                       params['startQuestion'],
+                                                       params['endQuestion'],
+                                                       params['numAnswers'],
+                                                       categories)
 
         conn.close()
 
@@ -194,3 +284,38 @@ def submit_answers(request):
     # Here, calculate the score based on correct answers if needed
 
     return response.Response(status=status.HTTP_201_CREATED)
+
+
+def fetch_questions_and_answers_faster_version(request):
+    with connection.cursor() as cursor:
+        cursor.execute("""
+            SELECT q.question_id, q.question_text, a.answer_id, a.answer_text, a.is_correct
+            FROM MedQuestions q
+            JOIN MedAnswers a ON q.question_id = a.question_id
+            WHERE q.question_id IN (
+                SELECT question_id
+                FROM MedQuestions
+                ORDER BY RANDOM()
+                LIMIT 100
+            )
+            ORDER BY q.question_id, RANDOM()
+            LIMIT 400;
+        """)
+        rows = cursor.fetchall()
+
+    # Transform the results into a structured dictionary
+    questions = {}
+    for row in rows:
+        question_id, question_text, answer_id, answer_text, is_correct = row
+        if question_id not in questions:
+            questions[question_id] = {
+                'question_text': question_text,
+                'answers': []
+            }
+        questions[question_id]['answers'].append({
+            'answer_id': answer_id,
+            'answer_text': answer_text,
+            'is_correct': is_correct
+        })
+
+    return JsonResponse({'questions': list(questions.values())})
