@@ -6,6 +6,8 @@ from helloproject.settings import BASE_DIR
 
 from helloproject import settings
 from django.templatetags.static import static
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
 
 db_params = {
     "dbname": "medicina",
@@ -87,8 +89,6 @@ def fetch_questions_and_answers(conn, num_questions, start_question, end_questio
 
 
 
-
-
 class PDF(fpdf.FPDF):
     def header(self):
         pass
@@ -156,3 +156,24 @@ def create_pdf_with_correct_answers(question_answers, filename):
         pdf.ln(10)  # Adjust the parameter to increase or decrease the space
 
     pdf.output(filename)
+
+
+def generate_pdf_from_questions(question_data):
+    pdf_path = '/path/to/save/questions.pdf'
+    c = canvas.Canvas(pdf_path, pagesize=letter)
+    width, height = letter  # Keep track of the PDF dimensions
+
+    y_position = height - 40  # Start 40 pixels down from the top
+
+    for question in question_data['questions']:
+        c.drawString(30, y_position, question['question_text'])
+        y_position -= 20
+        for answer in question['answers']:
+            answer_text = f"- {answer['answer_text']} {'(Correct)' if answer['is_correct'] else ''}"
+            c.drawString(35, y_position, answer_text)
+            y_position -= 20
+
+        y_position -= 10  # Extra space between questions
+
+    c.save()
+    return pdf_path

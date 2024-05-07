@@ -23,6 +23,9 @@ from rest_framework.response import Response
 from rest_framework import views, status
 from django.http import JsonResponse
 from django.db import connection
+import json
+from django.http import JsonResponse, HttpResponse
+from .utils import generate_pdf_from_questions  # Assume this is a function you have to write
 
 
 # Utility function for setting CORS headers
@@ -79,6 +82,7 @@ class TestHistoryView(views.APIView):
 from django.http import JsonResponse
 from django.db import connection
 from rest_framework.decorators import api_view
+
 
 @api_view(['GET'])
 def get_test_questions(request):
@@ -170,52 +174,20 @@ def get_test_questions(request):
     return JsonResponse({'questions': list(questions.values())})
 
 
-@cors_headers
-def generate_pdf(request):
+@api_view(['POST'])
+def generate_pdf_new_method(request):
     try:
-        params = get_request_params(request)
-        conn = connect_db(db_params)
-        categories = params['categories'].split(',') if params['categories'] else []
-        question_answers = fetch_questions_and_answers(conn,
-                                                       params['numQuestions'],
-                                                       params['startQuestion'],
-                                                       params['endQuestion'],
-                                                       params['numAnswers'],
-                                                       categories)
+        # Get data from POST request
+        question_data = json.loads(request.body.decode('utf-8'))
+        pdf_file_path = generate_pdf_from_questions(question_data)
 
-        conn.close()
-
-        pdf_directory = os.path.join(os.path.dirname(__file__), 'pdfs')
-        os.makedirs(pdf_directory, exist_ok=True)
-
-        # Filenames for the two PDFs
-        filename_questions = 'questions.pdf'
-        filename_questions_with_correct = 'questions_with_correct.pdf'
-
-        # File paths for the two PDFs
-        pdf_filepath_questions = os.path.join(pdf_directory, filename_questions)
-        pdf_filepath_questions_with_correct = os.path.join(pdf_directory, filename_questions_with_correct)
-
-        # Generate both PDFs
-        create_pdf(question_answers, pdf_filepath_questions)
-        create_pdf_with_correct_answers(question_answers, pdf_filepath_questions_with_correct)
-
-        # Zip both PDFs
-        zip_filename = "questions_package.zip"
-        zip_filepath = os.path.join(pdf_directory, zip_filename)
-        with zipfile.ZipFile(zip_filepath, 'w') as myzip:
-            myzip.write(pdf_filepath_questions, filename_questions)
-            myzip.write(pdf_filepath_questions_with_correct, filename_questions_with_correct)
-
-        # Return the zip file
-        with open(zip_filepath, 'rb') as zip_file:
-            response = HttpResponse(zip_file.read(), content_type='application/zip')
-            response['Content-Disposition'] = f'attachment; filename="{zip_filename}"'
+        # Send PDF as a response
+        with open(pdf_file_path, 'rb') as pdf:
+            response = HttpResponse(pdf.read(), content_type='application/pdf')
+            response['Content-Disposition'] = 'attachment; filename="questions.pdf"'
             return response
-
     except Exception as e:
-        return HttpResponse(content=f"An error occurred while generating the PDFs: {e}", status=500,
-                            content_type="text/plain")
+        return JsonResponse({'error': str(e)}, status=500)
 
 
 @rest_decorators.api_view(['POST'])
@@ -319,3 +291,51 @@ def fetch_questions_and_answers_faster_version(request):
         })
 
     return JsonResponse({'questions': list(questions.values())})
+
+
+@cors_headers
+def generate_pdf(request):
+    try:
+        params = get_request_params(request)
+        conn = connect_db(db_params)
+        categories = params['categories'].split(',') if params['categories'] else []
+        question_answers = fetch_questions_and_answers(conn,
+                                                       params['numQuestions'],
+                                                       params['startQuestion'],
+                                                       params['endQuestion'],
+                                                       params['numAnswers'],
+                                                       categories)
+
+        conn.close()
+
+        pdf_directory = os.path.join(os.path.dirname(__file__), 'pdfs')
+        os.makedirs(pdf_directory, exist_ok=True)
+
+        # Filenames for the two PDFs
+        filename_questions = 'questions.pdf'
+        filename_questions_with_correct = 'questions_with_correct.pdf'
+
+        # File paths for the two PDFs
+        pdf_filepath_questions = os.path.join(pdf_directory, filename_questions)
+        pdf_filepath_questions_with_correct = os.path.join(pdf_directory, filename_questions_with_correct)
+
+        # Generate both PDFs
+        create_pdf(question_answers, pdf_filepath_questions)
+        create_pdf_with_correct_answers(question_answers, pdf_filepath_questions_with_correct)
+
+        # Zip both PDFs
+        zip_filename = "questions_package.zip"
+        zip_filepath = os.path.join(pdf_directory, zip_filename)
+        with zipfile.ZipFile(zip_filepath, 'w') as myzip:
+            myzip.write(pdf_filepath_questions, filename_questions)
+            myzip.write(pdf_filepath_questions_with_correct, filename_questions_with_correct)
+
+        # Return the zip file
+        with open(zip_filepath, 'rb') as zip_file:
+            response = HttpResponse(zip_file.read(), content_type='application/zip')
+            response['Content-Disposition'] = f'attachment; filename="{zip_filename}"'
+            return response
+
+    except Exception as e:
+        return HttpResponse(content=f"An error occurred while generating the PDFs: {e}", status=500,
+                            content_type="text/plain")
