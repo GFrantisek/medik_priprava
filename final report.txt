@@ -31,10 +31,10 @@ Rozpracovane: bezpecnoste features -> napr urlcky, bezpecne prehodenie dat z BE 
 Neimplementovane vôbec: databaza otázok chemie, fyziky, databaza iných univerzit, nejaka sprava profilu -> zmena hesla, zmena mena, odmazanie historie testov ..
 
 Problemy:
-kusok dlho trvala user auth, pouzivatelska historia, vytvorenie bezpecnejsieho prostredia bude pain, plus code rendering, proste uhladny kod aby zobrazil google pri inspekcie kodu je celkovo znamy problem pre aplikacie vo vuecku / nuxte, takze to bude pain number 2
+kusok dlho trvala user auth, pouzivatelska historia, vytvorenie bezpecnejsieho prostredia bude pain, plus code rendering, proste uhladny kod aby zobrazil google pri inspekcie kodu je celkovo znamy problem pre aplikacie vo vuecku / nuxte, takze to bude pain number 2. takteiz nahadzovat chemcke vzorce do databazy, a najmä organicke nazvoslovie je problem ktory riesim asi 2 tyzdne, kedze sa mi nepaci obrazkove riesenie, ale vyzera to ako jedina cesta
 
 Keby robim odznova:
-Spravil by som hned na zaciatku user auth a kusok dbal na uhladnost môjho kodu.
+Spravil by som hned na zaciatku user auth a kusok dbal na uhladnost môjho kodu. taktiez by som implementoval udaje do db v nejakých pravidelných intervaloch, nech to maju kamarati skor dostupne.
 
 Hrdost / aspekty:
 Neviem ci hrdy, viem ze mam na viac, ale it is what it is. Popri nasej skole je dost tazke udrziavat stabilne projekty, takze v ramci casovych moznosti sa mi výsledok paci, urcite by som sa mal viacej povenovat frontendu stranky atd, co mam v plane do buducna po statniciach. 
