@@ -5,7 +5,7 @@ Meno: 			František Gábor
 Názov projektu: 	Medik príprava
 
 Link na FE (deploy):	https://github.com/GFrantisek/medik_priprava_fe_deploy	.....	TAG: final_version_1.1.0
-Link na BE (deploy):	https://github.com/GFrantisek/medik_priprava		.....	TAG: final_version_1.0.1
+Link na BE (deploy):	https://github.com/GFrantisek/medik_priprava		.....	TAG: final_version_1.1.0
 Link na deploy:		https://testovisko.netlify.app/				
 
 Postup na rozbehnutie:
