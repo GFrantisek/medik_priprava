@@ -6,7 +6,7 @@ from django.urls import include, path
 from rest_framework_simplejwt import views as jwt_views
 
 from helloapp.utils import fetch_questions_and_answers
-from helloapp.views import TestHistoryView
+from helloapp.views import TestHistoryView, get_user_tests
 
 urlpatterns = [
     path('register', views.register, name='register'),
@@ -14,6 +14,5 @@ urlpatterns = [
     path('user', views.detail, name='user'),
     path('refresh', jwt_views.TokenRefreshView.as_view(), name='refresh'),
     path('logout', jwt_views.TokenBlacklistView.as_view(), name='logout'),
-
 
 ]

@@ -2,7 +2,7 @@ from rest_framework import serializers
 
 from django.conf import settings
 
-from helloapp.models import MedApplicant, StudentAnswers, StudentTests
+from helloapp.models import MedApplicant, StudentAnswers, StudentTests, TestScores
 
 
 class StudentAnswersSerializer(serializers.ModelSerializer):
@@ -45,3 +45,5 @@ class AccountSerializer(serializers.ModelSerializer):
     class Meta:
         model = MedApplicant
         fields = ['id', 'username', 'email']
+
+

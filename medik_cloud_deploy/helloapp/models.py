@@ -1,3 +1,5 @@
+import uuid
+
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
@@ -132,3 +134,34 @@ class StudentAnswers(models.Model):
 
     class Meta:
         db_table = 'student_answers'
+
+
+class UserQuestionAnswers(models.Model):
+    user = models.ForeignKey('MedApplicant', on_delete=models.CASCADE)
+    test_id = models.UUIDField(default=uuid.uuid4, editable=False)
+    question = models.ForeignKey('MedQuestions', on_delete=models.CASCADE)
+    answer_ids = models.JSONField(default=list)
+    user_answers = models.JSONField(default=list)
+    incorrect_answers_ids = models.JSONField(default=list)  # New field for incorrect answer IDs
+
+    class Meta:
+        db_table = 'user_question_answers'
+
+
+class TestScores(models.Model):
+    user = models.ForeignKey('MedApplicant', on_delete=models.CASCADE, db_column='user_id')
+    test_id = models.UUIDField(default=uuid.uuid4, editable=False)
+    score = models.IntegerField()
+    max_score = models.IntegerField()
+    test_date = models.DateTimeField(auto_now_add=True)
+    duration = models.DurationField(null=True, blank=True)
+
+    class Meta:
+        db_table = 'test_scores'
+        indexes = [
+            models.Index(fields=['user_id'], name='idx_test_scores_user_id'),
+        ]
+
+    def __str__(self):
+        return f"{self.user.username} - Score: {self.score}/{self.max_score} on {self.test_date}"
+
