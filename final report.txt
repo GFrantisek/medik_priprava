@@ -1,13 +1,3 @@
-Meno, priezvisko
-Nazov projektu
-Link na repozitár, tag označujúci finálnu verziu v repozitári v tvare final_version (prípadne final_version_cisloSubverzie, ak by potrebovali pred termínom odovzdania ešte niečo fixnúť)
-Link na verejnú inštanciu projektu
-Postup ako rozbehať vývojové prostredie (kto si trúfa, kľudne ako Docker file / Docker compose)
-
-Aké features sú už implementované, rozpracované, neimplementované vobec?
-S čím ste mali problémy?
-Keby ste to robili znovu, čo by ste urobili inak?
-Ste hrdý na výsledky svojej práce? Ktorý aspekt projektu je podľa Vás najviac kvalitný?
 
 *************************************************FINAL REPORT*************************************************
 
@@ -16,27 +6,28 @@ Názov projektu: 	Medik príprava
 
 Link na FE (deploy):	https://github.com/GFrantisek/medik_priprava_fe_deploy	.....	TAG: final_version_1.1
 Link na BE (deploy):	https://github.com/GFrantisek/medik_priprava		.....	TAG: final_version_1.0.1
-Link na deploy:		https://testovisko.netlify.app/
+Link na deploy:		https://testovisko.netlify.app/				
 
 Postup na rozbehnutie:
 FE -> npm install, have node.js and so on. follow readme file in repo.
 BE -> have django, docker, google cloud run plugin, create a new local instance of google cloud run with docker.
 DB -> pripojenie cez udaje dostupne v beta reporte
+(technicky nič od Bety sa nezmenilo)
 
 Features:
-Hotove : download_pdf (vsade), generate test, generate standarad test, user score history, individual test history, special test creatin based on categories, or other parameters, skripty na rpacu s databázou -> cistenie, nahadzovanie, cistenie jsnu z ocr ...
+Hotové : download_pdf (všade), generate test, generate standarad test, user score history, individual test history, special test creatin based on categories, or other parameters, skripty na prácu s databázou -> čistenie, nahadzovanie, čistenie jsnu z ocr ...
 
-Rozpracovane: bezpecnoste features -> napr urlcky, bezpecne prehodenie dat z BE na FE a naopak, ajw overenie jsnov, rychlejsie user prihlásenie, user udrzanie instancie, code rendering
+Rozpracovane: bezpečnostné features -> napr urlcky, bezpecne prehodenie dat z BE na FE a naopak, ajw overenie jsnov, rýchlejšie user prihlásenie, user udržanie inštancie, code rendering ...
 
-Neimplementovane vôbec: databaza otázok chemie, fyziky, databaza iných univerzit, nejaka sprava profilu -> zmena hesla, zmena mena, odmazanie historie testov ..
+Neimplementovane vôbec: databáza otázok chémie, fyziky, databáza iných univerzít, nejaká sprava profilu -> zmena hesla, zmena mena, odmazanie histórie testov ..
 
-Problemy:
-kusok dlho trvala user auth, pouzivatelska historia, vytvorenie bezpecnejsieho prostredia bude pain, plus code rendering, proste uhladny kod aby zobrazil google pri inspekcie kodu je celkovo znamy problem pre aplikacie vo vuecku / nuxte, takze to bude pain number 2. takteiz nahadzovat chemcke vzorce do databazy, a najmä organicke nazvoslovie je problem ktory riesim asi 2 tyzdne, kedze sa mi nepaci obrazkove riesenie, ale vyzera to ako jedina cesta
+Problémy:
+kúsok dlho trvala user auth, používateľská história, vytvorenie bezpečnejšieho prostredia bude pain, plus code rendering, proste úhľadný kód aby zobrazil google pri inšpekcie kódu je celkovo známy problem pre aplikácie vo vuecku / nuxte, takže to bude pain number 2. taktiež nahadzovať chemické vzorce do databázy, a najmä organické názvoslovie je problem ktorý riešim asi 2 týždne, keďže sa mi nepáči obrázkové riešenie, ale vyzerá to ako jediná cesta
 
-Keby robim odznova:
-Spravil by som hned na zaciatku user auth a kusok dbal na uhladnost môjho kodu. taktiez by som implementoval udaje do db v nejakých pravidelných intervaloch, nech to maju kamarati skor dostupne.
+Keby robím odznova:
+Spravil by som hneď na začiatku user auth a kúsok dbal na úhľadnosť môjho kódu. Taktiež by som implementoval údaje do db v nejakých pravidelných intervaloch, nech to majú kamaráti skôr dostupne.
 
-Hrdost / aspekty:
-Neviem ci hrdy, viem ze mam na viac, ale it is what it is. Popri nasej skole je dost tazke udrziavat stabilne projekty, takze v ramci casovych moznosti sa mi výsledok paci, urcite by som sa mal viacej povenovat frontendu stranky atd, co mam v plane do buducna po statniciach. 
+Hrdosť / aspekty:
+Neviem ci hrdý, viem ze mam na viac, ale it is what it is. Popri nasej skole je dost ťažké udržiavať stabilne projekty, takže v rámci časových možnosti sa mi výsledok páči, určite by som sa mal viacej povenovať frontendu stránky atď., co mam v plane do budúcna po štátniciach. 
 
-Kvalitovo by som povedal, ze mat 1500 riadkov otázok a 1500*8 riadkov odpovedi v databaze, realizovane cez x skriptov a cistene cez dalsich 6 skriptov s vyuzitim ocrka je celkom good deal. Niekto by mohol vymyslliet nejaky lahsi sposob na to, pockame ci gpt5 bude vediet pekne citat z obrazkov, mozno potom nahadzovanie chemie bude rychlesie a nebude treba cistiace skripty.
+Kvalitovo by som povedal, ze mat 1500 riadkov otázok a 1500*8 riadkov odpovedi v databáze, realizovane cez x skriptov a čistenie cez ďalších 6 skriptov s využitím ocrka je celkom good deal. Niekto by mohol vymyslieť nejaký ľahší spôsob na to, počkáme či gpt5 bude vedieť pekne čítať z obrázkov, možno potom nahadzovanie chémie bude rýchlejšie a nebude treba čistiace skripty.
